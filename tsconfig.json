@@ -1,3 +1,10 @@
 {
-  "extends": "astro/tsconfigs/strictest"
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    // Modules
+    "baseUrl": "./",
+
+    // Type Checking
+    "strict": true
+  }
 }
