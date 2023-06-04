@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}"],
 	plugins: [require("daisyui"), require("@tailwindcss/typography")],
 };

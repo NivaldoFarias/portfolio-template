@@ -1,10 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
+import Code from "../components/Code.astro";
 ---
 
-<Layout title="Welcome to Astro.">
-	<header class="prose lg:prose-xl">header</header>
+<Layout title="Built with Astro 🚀">
+	<header class="w-full flex justify-between pt-3 px-6">
+		<span>Header Text</span>
+		<span>
+			More Text but
+			<span class="text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500 bg-clip-text">
+				prettier
+			</span>
+		</span>
+	</header>
 	<main class="container max-w-xl mx-auto">
 		<h1 class="m-0 text-5xl font-extrabold">
 			Bem Vindo,
@@ -13,10 +22,11 @@ import Card from "../components/Card.astro";
 			</span>
 		</h1>
 		<p
-			class="p-4 mx-0 my-4 leading-relaxed border-solid rounded-md bg-slate-200 border-1 border-violet-600/25"
+			class="p-4 mx-0 my-4 leading-relaxed text-gray-600 border-solid rounded-md bg-slate-100 border-1 border-violet-600/25"
 		>
-			To get started, open the directory <code class="code">src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
+			To get started, open the directory <Code>src/pages</Code> in your project.
+			<br />
+			<strong class="text-violet-600">Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
 		</p>
 		<ul
 			role="list"

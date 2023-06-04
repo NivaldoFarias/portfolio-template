@@ -1,25 +1,25 @@
 {
-  "extends": "astro/tsconfigs/strictest",
-  "compilerOptions": {
-    // Modules
-    "baseUrl": "./",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+	"extends": "astro/tsconfigs/strictest",
+	"compilerOptions": {
+		// Modules
+		"baseUrl": "./",
+		"module": "nodenext",
+		"moduleResolution": "nodenext",
 
-    // Type Checking
-    "strict": true,
+		// Type Checking
+		"strict": true,
 
-    // Language and Environment
-    "target": "esnext",
-    "verbatimModuleSyntax": true,
+		// Language and Environment
+		"target": "esnext",
+		"verbatimModuleSyntax": true,
 
-    // Interop Constraints
-    "forceConsistentCasingInFileNames": true,
-    "plugins": [
-      {
-        "name": "@astrojs/ts-plugin"
-      }
-    ]
-  },
-  "exclude": ["node_modules"]
+		// Interop Constraints
+		"forceConsistentCasingInFileNames": true,
+		"plugins": [
+			{
+				"name": "@astrojs/ts-plugin"
+			}
+		]
+	},
+	"exclude": ["node_modules"]
 }
