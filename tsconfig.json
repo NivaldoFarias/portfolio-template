@@ -3,8 +3,17 @@
   "compilerOptions": {
     // Modules
     "baseUrl": "./",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
 
     // Type Checking
-    "strict": true
-  }
+    "strict": true,
+
+    // Language and Environment
+    "target": "esnext",
+
+    // Interop Constraints
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": ["node_modules"]
 }
