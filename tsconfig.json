@@ -11,9 +11,15 @@
 
     // Language and Environment
     "target": "esnext",
+    "verbatimModuleSyntax": true,
 
     // Interop Constraints
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ]
   },
   "exclude": ["node_modules"]
 }

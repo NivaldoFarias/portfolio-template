@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.code {
+		@apply text-sm font-bold violet-600 bg-violet-600/12 border-4;
+	}
+}
