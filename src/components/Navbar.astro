@@ -1,23 +1,35 @@
 ---
-import Moon from "../components/svg/Moon.astro";
-import Sun from "../components/svg/Sun.astro";
+import moon from "../assets/moon.svg";
+import sun from "../assets/sun.svg";
 ---
 
 <nav class="navbar bg-base-100 w-full pt-3 px-6">
   <div class="flex-1">
     <a class="btn btn-ghost normal-case text-xl">Nivaldo Farias</a>
   </div>
-  <div class="flex-none">
+  <div class="flex gap-2">
     <span>
-      More Text but
-      <span class="text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500 bg-clip-text">
-        prettier
-      </span>
+      More text but
+      <span class="fancy-text">prettier</span>
     </span>
     <label class="swap swap-rotate">
       <input type="checkbox" />
-      <Sun />
-      <Moon />
+      <img
+        src={moon.src}
+        tabindex="0"
+        width="24"
+        height="24"
+        alt="Moon icon. Click enables dark mode"
+        class="swap-off fill-current w-10 h-10"
+      />
+      <img
+        src={sun.src}
+        tabindex="0"
+        width="24"
+        height="24"
+        alt="Sun icon. Click enables light mode"
+        class="swap-on fill-current w-10 h-10"
+      />
     </label>
   </div>
 </nav>

@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 
 import mdx from "@astrojs/mdx";
-import image from "@astrojs/image";
 import tailwind from "@astrojs/tailwind";
 import prefetch from "@astrojs/prefetch";
 import vercel from "@astrojs/vercel/static";
@@ -13,7 +12,7 @@ import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 export default defineConfig({
 	output: "static",
 	adapter: vercel({ analytics: true }),
-	integrations: [tailwind(), mdx(), image(), prefetch()],
+	integrations: [tailwind(), mdx(), prefetch()],
 	markdown: {
 		shikiConfig: {
 			theme: "rose-pine-moon",
@@ -21,5 +20,8 @@ export default defineConfig({
 		},
 		remarkPlugins: [remarkToc],
 		rehypePlugins: [rehypeAccessibleEmojis],
+	},
+	experimental: {
+		assets: true,
 	},
 });

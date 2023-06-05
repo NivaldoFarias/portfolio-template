@@ -16,4 +16,8 @@
 	.link-card-grid {
 		@apply grid grid-cols-2 gap-3 p-0;
 	}
+
+	.fancy-text {
+		@apply animate-text bg-gradient-to-r from-teal-500 via-violet-600 to-pink-500 bg-clip-text font-black text-transparent;
+	}
 }
