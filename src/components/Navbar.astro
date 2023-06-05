@@ -1,0 +1,23 @@
+---
+import Moon from "../components/svg/Moon.astro";
+import Sun from "../components/svg/Sun.astro";
+---
+
+<nav class="navbar bg-base-100 w-full pt-3 px-6">
+  <div class="flex-1">
+    <a class="btn btn-ghost normal-case text-xl">Nivaldo Farias</a>
+  </div>
+  <div class="flex-none">
+    <span>
+      More Text but
+      <span class="text-transparent bg-gradient-to-r to-violet-500 from-fuchsia-500 bg-clip-text">
+        prettier
+      </span>
+    </span>
+    <label class="swap swap-rotate">
+      <input type="checkbox" />
+      <Sun />
+      <Moon />
+    </label>
+  </div>
+</nav>
