@@ -1,15 +1,22 @@
 ---
+export interface Props {
+  href: string;
+  label: string;
+}
+
 import moon from "../assets/moon.svg";
 import sun from "../assets/sun.svg";
+
+const { href, label } = Astro.props;
 ---
 
-<nav class="navbar bg-base-100 w-full pt-3 pr-2">
+<nav class="navbar bg-base-100 w-full pt-3 pr-4">
   <div class="flex-1">
     <a
-      href="/about"
+      href={href}
       class="btn btn-sm btn-ghost normal-case text-xl"
     >
-      About
+      {label}
     </a>
   </div>
   <div class="flex text-md gap-2">
