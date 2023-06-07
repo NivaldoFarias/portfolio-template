@@ -9,6 +9,9 @@ import vercel from "@astrojs/vercel/static";
 import remarkToc from "remark-toc";
 import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 
+// Vite Plugins
+import lightningcss from "vite-plugin-lightningcss";
+
 export default defineConfig({
 	output: "static",
 	adapter: vercel({ analytics: true }),
@@ -23,5 +26,12 @@ export default defineConfig({
 	},
 	experimental: {
 		assets: true,
+	},
+	vite: {
+		plugins: [
+			lightningcss({
+				minify: true,
+			}),
+		],
 	},
 });
