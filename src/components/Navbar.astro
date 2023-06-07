@@ -3,11 +3,16 @@ import moon from "../assets/moon.svg";
 import sun from "../assets/sun.svg";
 ---
 
-<nav class="navbar bg-base-100 w-full pt-3 px-6">
+<nav class="navbar bg-base-100 w-full pt-3 pr-2">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-xl">Nivaldo Farias</a>
+    <a
+      href="/about"
+      class="btn btn-sm btn-ghost normal-case text-xl"
+    >
+      About
+    </a>
   </div>
-  <div class="flex gap-2">
+  <div class="flex text-md gap-2">
     <span>
       More text but
       <span class="fancy-text">prettier</span>
@@ -20,7 +25,7 @@ import sun from "../assets/sun.svg";
         width="24"
         height="24"
         alt="Moon icon. Click enables dark mode"
-        class="swap-off fill-current w-10 h-10"
+        class="swap-off fill-current"
       />
       <img
         src={sun.src}
@@ -28,7 +33,7 @@ import sun from "../assets/sun.svg";
         width="24"
         height="24"
         alt="Sun icon. Click enables light mode"
-        class="swap-on fill-current w-10 h-10"
+        class="swap-on fill-current"
       />
     </label>
   </div>

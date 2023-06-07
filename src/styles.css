@@ -6,13 +6,13 @@
 	body {
 		@apply flex h-screen w-screen flex-col gap-12;
 	}
-
-	code {
-		@apply rounded bg-violet-600/10 px-2 py-1 text-sm font-bold text-violet-600;
-	}
 }
 
 @layer components {
+	.custom-code {
+		@apply rounded bg-violet-600/10 px-2 py-1 text-sm font-bold text-violet-600;
+	}
+
 	.link-card-grid {
 		@apply grid grid-cols-2 gap-3 p-0;
 	}
