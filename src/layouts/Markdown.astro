@@ -1,38 +1,44 @@
 ---
 import "../styles.css";
 
-import Footer from "src/components/Footer.astro";
-import Navbar from "src/components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
 
-import type { MarkdownLayoutProps } from "astro";
-type Props = MarkdownLayoutProps<{
+interface Props {
   title: string;
-  author: string;
-  date: string;
-}>;
+}
 
-const { frontmatter } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width"
-    />
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/favicon.svg"
-    />
-    <meta
-      name="generator"
-      content={Astro.generator}
-    />
-    <title>{frontmatter.title}</title>
-  </head>
+  <script is:inline>
+    if (localStorage.getItem("theme") === null) {
+      document.documentElement.setAttribute("data-theme", "light");
+    } else document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
+  </script>
+  <script>
+    import { themeChange } from "theme-change";
+    themeChange();
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width"
+  />
+  <link
+    rel="icon"
+    type="image/svg+xml"
+    href="/favicon.svg"
+  />
+  <meta
+    name="generator"
+    content={Astro.generator}
+  />
+  <title>{title}</title>
+
   <body class="w-screen min-h-screen relative pb-32">
     <div class="w-full flex flex-col gap-10">
       <Navbar
@@ -46,9 +52,3 @@ const { frontmatter } = Astro.props;
     <Footer />
   </body>
 </html>
-<style is:global>
-  :root {
-    --accent: 124, 58, 237;
-    --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-  }
-</style>

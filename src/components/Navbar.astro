@@ -4,8 +4,8 @@ export interface Props {
   label: string;
 }
 
-import moon from "../assets/moon.svg";
-import sun from "../assets/sun.svg";
+// import moon from "../assets/moon.svg";
+// import sun from "../assets/sun.svg";
 
 const { href, label } = Astro.props;
 ---
@@ -19,29 +19,34 @@ const { href, label } = Astro.props;
       {label}
     </a>
   </div>
-  <div class="flex text-md gap-2">
-    <span>
-      More text but
-      <span class="fancy-text">prettier</span>
-    </span>
-    <label class="swap swap-rotate">
-      <input type="checkbox" />
-      <img
-        src={moon.src}
-        tabindex="0"
-        width="24"
-        height="24"
-        alt="Moon icon. Click enables dark mode"
-        class="swap-off fill-current"
-      />
-      <img
-        src={sun.src}
-        tabindex="0"
-        width="24"
-        height="24"
-        alt="Sun icon. Click enables light mode"
-        class="swap-on fill-current"
-      />
+
+  <div class="dropdown dropdown-bottom dropdown-end">
+    <label
+      tabindex="0"
+      class="btn m-1"
+    >
+      <span class="fancy-text">Theme</span>
     </label>
+    <ul
+      tabindex="0"
+      class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+    >
+      <li>
+        <button
+          data-set-theme="dark"
+          data-act-class="ACTIVECLASS"
+        >
+          Dark
+        </button>
+      </li>
+      <li>
+        <button
+          data-set-theme="light"
+          data-act-class="ACTIVECLASS"
+        >
+          Light
+        </button>
+      </li>
+    </ul>
   </div>
 </nav>

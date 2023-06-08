@@ -1,0 +1,117 @@
+---
+import caret from "../assets/caret-down.svg";
+---
+
+<div class="relative inline-block text-left">
+  <div>
+    <button
+      type="button"
+      id="menu-button"
+      aria-expanded="true"
+      aria-haspopup="true"
+      class="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+    >
+      Options
+      <img
+        src={caret.src}
+        alt="Caret down"
+        width="20"
+        height="20"
+        aria-hidden="true"
+        class="-mr-1 h-5 w-5 text-gray-400"
+      />
+    </button>
+  </div>
+
+  <div
+    role="menu"
+    tabindex="-1"
+    aria-orientation="vertical"
+    aria-labelledby="menu-button"
+    class="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+  >
+    <div
+      class="py-1"
+      role="none"
+    >
+      <a
+        href="#"
+        class="text-gray-700 block px-4 py-2 text-sm"
+        role="menuitem"
+        tabindex="-1"
+        id="menu-item-0"
+      >
+        Edit
+      </a>
+      <a
+        href="#"
+        class="text-gray-700 block px-4 py-2 text-sm"
+        role="menuitem"
+        tabindex="-1"
+        id="menu-item-1"
+      >
+        Duplicate
+      </a>
+    </div>
+    <div
+      class="py-1"
+      role="none"
+    >
+      <a
+        href="#"
+        class="text-gray-700 block px-4 py-2 text-sm"
+        role="menuitem"
+        tabindex="-1"
+        id="menu-item-2"
+      >
+        Archive
+      </a>
+      <a
+        href="#"
+        class="text-gray-700 block px-4 py-2 text-sm"
+        role="menuitem"
+        tabindex="-1"
+        id="menu-item-3"
+      >
+        Move
+      </a>
+    </div>
+    <div
+      class="py-1"
+      role="none"
+    >
+      <a
+        href="#"
+        class="text-gray-700 block px-4 py-2 text-sm"
+        role="menuitem"
+        tabindex="-1"
+        id="menu-item-4"
+      >
+        Share
+      </a>
+      <a
+        href="#"
+        class="text-gray-700 block px-4 py-2 text-sm"
+        role="menuitem"
+        tabindex="-1"
+        id="menu-item-5"
+      >
+        Add to favorites
+      </a>
+    </div>
+    <div
+      class="py-1"
+      role="none"
+    >
+      <a
+        href="#"
+        class="text-gray-700 block px-4 py-2 text-sm"
+        role="menuitem"
+        tabindex="-1"
+        id="menu-item-6"
+      >
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
