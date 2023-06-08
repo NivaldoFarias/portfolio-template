@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon";
 import github from "../assets/github.svg";
 import gitlab from "../assets/gitlab.svg";
 import linkedin from "../assets/linkedin.svg";
@@ -7,44 +8,39 @@ import linkedin from "../assets/linkedin.svg";
 <div class="absolute bottom-0 left-0 w-full">
   <div class="divider">Credits</div>
   <footer
-    class="footer flex align-center lg:mx-auto lg:max-w-xl justify-between gap-0 p-4 text-neutral-content justify-self-end"
+    class="footer flex align-center lg:mx-auto lg:max-w-xl justify-between gap-0 p-4 justify-self-end"
   >
-    <div class="text-center lg:self-center grid-flow-col">
-      <p>Nivaldo Farias, 2023.</p>
-    </div>
+    <div class="lg:self-center">Nivaldo Farias, 2023.</div>
     <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
       <a
         href="https://github.com/NivaldoFarias"
         target="_blank"
       >
-        <img
-          src={github.src}
-          width="24"
-          height="24"
-          alt="Github logo"
+        <Icon
+          name="mdi:github"
+          height="26"
+          width="26"
         />
-      </a>
-      <a
-        href="https://gitlab.com/NivaldoFarias"
-        target="_blank"
-      >
-        <img
-          src={gitlab.src}
-          width="24"
-          height="24"
-          alt="Gitlab logo"
-        />
-      </a>
-      <a
-        href="https://www.linkedin.com/in/nivaldofarias/"
-        target="_blank"
-      >
-        <img
-          src={linkedin.src}
-          width="24"
-          height="24"
-          alt="Linkedin logo"
-        />
+        <a
+          href="https://gitlab.com/NivaldoFarias"
+          target="_blank"
+        >
+          <Icon
+            name="jam:gitlab"
+            height="28"
+            width="28"
+          />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/nivaldofarias/"
+          target="_blank"
+        >
+          <Icon
+            name="mdi:linkedin"
+            height="26"
+            width="26"
+          />
+        </a>
       </a>
     </div>
   </footer>

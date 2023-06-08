@@ -1,11 +1,10 @@
 ---
+import { Icon } from "astro-icon";
+
 export interface Props {
   href: string;
   label: string;
 }
-
-// import moon from "../assets/moon.svg";
-// import sun from "../assets/sun.svg";
 
 const { href, label } = Astro.props;
 ---
@@ -23,8 +22,13 @@ const { href, label } = Astro.props;
   <div class="dropdown dropdown-bottom dropdown-end">
     <label
       tabindex="0"
-      class="btn m-1"
+      class="btn"
     >
+      <Icon
+        name="ph:swatches"
+        height="28"
+        width="28"
+      />
       <span class="fancy-text">Theme</span>
     </label>
     <ul
@@ -36,7 +40,12 @@ const { href, label } = Astro.props;
           data-set-theme="dark"
           data-act-class="ACTIVECLASS"
         >
-          Dark
+          <Icon
+            name="ph:moon"
+            height="24"
+            width="24"
+          />
+          <span>Dark</span>
         </button>
       </li>
       <li>
@@ -44,7 +53,12 @@ const { href, label } = Astro.props;
           data-set-theme="light"
           data-act-class="ACTIVECLASS"
         >
-          Light
+          <Icon
+            name="ph:sun"
+            height="24"
+            width="24"
+          />
+          <span>Light</span>
         </button>
       </li>
     </ul>
