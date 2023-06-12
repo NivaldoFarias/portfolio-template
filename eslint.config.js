@@ -9,6 +9,7 @@ export default [
 		},
 		extends: [
 			"eslint:recommended",
+			"plugin:unicorn/recommended",
 			"plugin:astro/jsx-a11y-strict",
 			"plugin:@typescript-eslint/recommended",
 		],

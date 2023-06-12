@@ -4,7 +4,6 @@
 		// Modules
 		"baseUrl": "./",
 		"module": "nodenext",
-		"moduleResolution": "nodenext",
 
 		// Type Checking
 		"strict": true,

@@ -1,5 +1,8 @@
 ---
 import { Icon } from "astro-icon";
+import { THEMES } from "../data/themes";
+
+import ColorPalette from "./ColorPalette.astro";
 
 export interface Props {
   href: string;
@@ -9,58 +12,51 @@ export interface Props {
 const { href, label } = Astro.props;
 ---
 
-<nav class="navbar bg-base-100 w-full pt-3 pr-4">
-  <div class="flex-1">
-    <a
-      href={href}
-      class="btn btn-sm btn-ghost normal-case text-xl"
-    >
-      {label}
-    </a>
-  </div>
+<div>
+  <nav class="navbar bg-base-100 w-full pt-3 pr-4">
+    <div class="flex-1">
+      <a
+        href={href}
+        class="btn btn-sm btn-ghost normal-case text-xl"
+      >
+        {label}
+      </a>
+    </div>
 
-  <div class="dropdown dropdown-bottom dropdown-end">
-    <label
-      tabindex="0"
-      class="btn"
+    <div
+      title="Change theme"
+      class="dropdown dropdown-bottom dropdown-end"
     >
-      <Icon
-        name="ph:swatches"
-        height="28"
-        width="28"
-      />
-      <span class="fancy-text">Theme</span>
-    </label>
-    <ul
-      tabindex="0"
-      class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-    >
-      <li>
-        <button
-          data-set-theme="dark"
-          data-act-class="ACTIVECLASS"
-        >
-          <Icon
-            name="ph:moon"
-            height="24"
-            width="24"
-          />
-          <span>Dark</span>
-        </button>
-      </li>
-      <li>
-        <button
-          data-set-theme="light"
-          data-act-class="ACTIVECLASS"
-        >
-          <Icon
-            name="ph:sun"
-            height="24"
-            width="24"
-          />
-          <span>Light</span>
-        </button>
-      </li>
-    </ul>
-  </div>
-</nav>
+      <button class="btn normal-case btn-ghost">
+        <Icon
+          name="ph:swatches"
+          height="28"
+          width="28"
+        />
+        <span class="fancy-text text-lg">Theme</span>
+        <Icon
+          name="ph:caret-down-bold"
+          height="16"
+          width="16"
+        />
+      </button>
+      <div
+        class="dropdown-content text-base-content menu shadow bg-base-200 rounded-box w-56 overflow-y-auto top-px h-[70vh] max-h-96 mt-8"
+      >
+        <div class="flex flex-col gap-3 p-2">
+          {
+            THEMES.map(({ theme, label }) => {
+              return (
+                <ColorPalette
+                  theme={theme}
+                  label={label}
+                />
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="divider m-0"></div>
+</div>

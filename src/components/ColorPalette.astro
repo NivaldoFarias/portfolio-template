@@ -1,0 +1,21 @@
+---
+import type { THEMES } from "../data/themes";
+
+export type Props = (typeof THEMES)[number];
+const { theme, label } = Astro.props;
+---
+
+<button
+  data-theme={theme}
+  data-set-theme={theme}
+  data-act-class="active-theme"
+  class="outline-base rounded-lg flex px-4 justify-between py-2 bg-base-100 transition-all"
+>
+  <span class="font-medium">{label}</span>
+  <div class="flex gap-1">
+    <div class="w-2 h-5 rounded bg-primary"></div>
+    <div class="w-2 h-5 rounded bg-secondary"></div>
+    <div class="w-2 h-5 rounded bg-accent"></div>
+    <div class="w-2 h-5 rounded bg-neutral"></div>
+  </div>
+</button>
