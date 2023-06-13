@@ -14,50 +14,43 @@ const { title } = Astro.props;
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <script is:inline>
-    if (localStorage.getItem("theme") === null) {
-      document.documentElement.setAttribute("data-theme", "light");
-    } else document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
-  </script>
-  <script>
-    import { themeChange } from "theme-change";
-    themeChange();
-  </script>
+  <head>
+    <script is:inline>
+      if (localStorage.getItem("theme") === null) {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else document.documentElement.setAttribute("data-theme", localStorage.getItem("theme"));
+    </script>
+    <script>
+      import { themeChange } from "theme-change";
+      themeChange();
+    </script>
 
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width"
-  />
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="/favicon.svg"
-  />
-  <meta
-    name="generator"
-    content={Astro.generator}
-  />
-  <title>{title}</title>
-
-  <body class="relative w-screen min-h-screen pb-32">
-    <div class="drawer lg:drawer-open">
-      <input
-        id="drawer"
-        type="checkbox"
-        class="drawer-toggle"
-      />
-      <main class="drawer-content">
-        <Navbar
-          href="/"
-          label="Home"
-        />
-        <div class="px-4 prose-sm prose lg:prose">
-          <slot />
-        </div>
-      </main>
-
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <meta
+      name="generator"
+      content={Astro.generator}
+    />
+    <title>{title}</title>
+  </head>
+  <body class="flex overflow-x-hidden flex-col relative w-screen min-h-screen pb-32">
+    <Navbar
+      href="/"
+      label="Home"
+    />
+    <div class="flex justify-center pr-0 md:pr-[5.3rem]">
       <Sidebar />
+      <div class="px-4 prose pt-4">
+        <slot />
+      </div>
     </div>
     <Footer />
   </body>

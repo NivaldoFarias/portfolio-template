@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 @layer base {
-	code {
-		@apply mx-0.5 !rounded-md bg-neutral !py-1 leading-none !text-neutral-content;
+	:not(.astro-code) > code {
+		@apply rounded-md bg-neutral py-1 leading-none text-neutral-content !important;
 	}
 
-	.prose a {
+	:not(.astro-code) > code:not(:only-child) {
+		@apply mx-0.5 !important;
+	}
+
+	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a {
 		@apply font-semibold underline decoration-2 underline-offset-2;
 	}
 }
