@@ -3,13 +3,6 @@ import { Icon } from "astro-icon";
 import { THEMES } from "../data/themes";
 
 import ColorPalette from "./ColorPalette.astro";
-
-export interface Props {
-  href: string;
-  label: string;
-}
-
-const { href, label } = Astro.props;
 ---
 
 <div class="sticky top-0 z-30 mb-4 w-screen">
@@ -36,12 +29,7 @@ const { href, label } = Astro.props;
           </svg>
         </label>
       </div>
-      <a
-        href={href}
-        class="text-xl normal-case btn btn-sm btn-ghost"
-      >
-        {label}
-      </a>
+      <kbd class="text-xl kbd">placeholder</kbd>
     </div>
 
     <div

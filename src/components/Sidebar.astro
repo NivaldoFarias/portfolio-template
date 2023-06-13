@@ -8,21 +8,20 @@ import { Icon } from "astro-icon";
       <a class="flex items-center gap-2">
         <Icon
           aria-label="Content"
+          class="text-primary"
           name="ph:scroll-fill"
           height="22"
           width="22"
-          class="text-primary"
         />
         <span class="font-semibold opacity-80">Content</span>
       </a>
       <ul>
-        <li><a>Sidebar Item 2</a></li>
-        <li><a>Sidebar Item 3</a></li>
+        <li><a href="/">Home<span class="text-xl">&rarr;</span></a></li>
         <li>
-          <a class="font-semibold opacity-80">Child 1</a>
+          <span class="font-semibold opacity-80">Repositories</span>
           <ul>
-            <li><a>Sidebar Item 4</a></li>
-            <li><a>Sidebar Item 5</a></li>
+            <li><a href="/repo/test">Test<span class="text-xl">&rarr;</span></a></li>
+            <li><a>Another Page</a></li>
           </ul>
         </li>
       </ul>
