@@ -3,7 +3,7 @@ import Markdown from "../../layouts/Markdown.astro";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-  const repoEntries = await getCollection<string>("repo");
+  const repoEntries = await getCollection("repo");
   return repoEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },

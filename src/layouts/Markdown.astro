@@ -40,7 +40,7 @@ const { title } = Astro.props;
   />
   <title>{title}</title>
 
-  <body class="w-screen min-h-screen relative pb-32">
+  <body class="relative w-screen min-h-screen pb-32">
     <div class="drawer lg:drawer-open">
       <input
         id="drawer"
@@ -52,7 +52,7 @@ const { title } = Astro.props;
           href="/"
           label="Home"
         />
-        <div class="prose prose-sm lg:prose px-4">
+        <div class="px-4 prose-sm prose lg:prose">
           <slot />
         </div>
       </main>

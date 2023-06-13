@@ -13,7 +13,7 @@ const { href, label } = Astro.props;
 ---
 
 <div class="sticky top-0">
-  <nav class="navbar bg-base-100 h-16 w-full pt-3 pr-4 bg-opacity-70 backdrop-blur transition-all">
+  <nav class="w-full h-16 pt-3 pr-4 transition-all navbar bg-base-100 bg-opacity-70 backdrop-blur">
     <div class="flex-1">
       <div class="flex-none lg:hidden">
         <label
@@ -38,7 +38,7 @@ const { href, label } = Astro.props;
       </div>
       <a
         href={href}
-        class="btn btn-sm btn-ghost normal-case text-xl"
+        class="text-xl normal-case btn btn-sm btn-ghost"
       >
         {label}
       </a>
@@ -48,13 +48,13 @@ const { href, label } = Astro.props;
       title="Change theme"
       class="dropdown dropdown-bottom dropdown-end"
     >
-      <button class="btn normal-case btn-ghost">
+      <button class="normal-case btn btn-ghost">
         <Icon
           name="ph:swatches"
           height="28"
           width="28"
         />
-        <span class="fancy-text text-lg">Theme</span>
+        <span class="text-lg fancy-text">Theme</span>
         <Icon
           name="ph:caret-down-bold"
           height="16"
@@ -79,5 +79,5 @@ const { href, label } = Astro.props;
       </div>
     </div>
   </nav>
-  <div class="divider m-0"></div>
+  <div class="m-0 divider"></div>
 </div>
