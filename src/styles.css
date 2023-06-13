@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+	code {
+		@apply mx-0.5 !rounded-md bg-neutral !py-1 leading-none !text-neutral-content;
+	}
+
+	.prose a {
+		@apply font-semibold underline decoration-2 underline-offset-2;
+	}
+}
+
 @layer components {
 	.custom-code {
 		@apply rounded bg-violet-600/10 px-2 py-1 text-sm font-bold text-violet-600;
@@ -17,5 +27,9 @@
 
 	.active-theme {
 		@apply border-l-4 border-primary;
+	}
+
+	.animate-skeleton {
+		@apply relative isolate overflow-hidden  before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:border-t before:border-rose-100/10 before:bg-gradient-to-r before:from-transparent before:via-base-content/5 before:to-transparent;
 	}
 }

@@ -51,6 +51,11 @@ module.exports = {
 						"background-position": "right center",
 					},
 				},
+				shimmer: {
+					"100%": {
+						transform: "translateX(100%)",
+					},
+				},
 			},
 		},
 	},

@@ -2,18 +2,18 @@
 import Card from "./Card.astro";
 ---
 
-<main class="container max-w-xl px-4">
+<main class="container max-w-3xl min-w-0 px-2 mt-4 md:px-6">
   <h1 class="m-0 text-4xl font-extrabold">
     Personal
     <span class="fancy-text">Portfolio</span>
   </h1>
-  <p
-    class="p-4 mx-0 my-4 leading-relaxed text-gray-600 border-solid rounded-md bg-slate-100 border-1 border-violet-600/25"
-  >
-    To get started, open the directory <code class="custom-code">src/pages</code> in your project.
+  <div class="prose py-2">
+    To get started, open the directory <code>src/pages</code> in your project.
     <br />
-    <strong class="text-violet-600">Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-  </p>
+    <strong class="underline decoration-2 decoration-accent underline-offset-2">
+      Code Challenge:
+    </strong> Tweak the "Welcome to Astro" message above.
+  </div>
   <ul
     role="list"
     class="link-card-grid"

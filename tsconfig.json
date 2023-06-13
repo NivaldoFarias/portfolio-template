@@ -20,5 +20,5 @@
 			}
 		]
 	},
-	"exclude": ["node_modules", ".astro"]
+	"exclude": ["node_modules", ".astro/"]
 }

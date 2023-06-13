@@ -46,20 +46,15 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body class="relative flex flex-col justify-between w-screen min-h-screen pb-32">
-		<div class="drawer lg:drawer-open">
-			<input
-				id="drawer"
-				type="checkbox"
-				class="drawer-toggle"
+		<div class="flex flex-col">
+			<Navbar
+				href="/repo/test"
+				label="README"
 			/>
-			<main class="drawer-content">
-				<Navbar
-					href="/repo/test"
-					label="README"
-				/>
+			<div class="flex justify-center gap-6 pt-4 mx-auto">
+				<Sidebar />
 				<Home />
-			</main>
-			<Sidebar />
+			</div>
 		</div>
 		<Footer />
 	</body>
