@@ -14,6 +14,18 @@
 	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a {
 		@apply font-semibold underline decoration-2 underline-offset-2;
 	}
+
+	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a:nth-of-type(odd) {
+		@apply decoration-accent;
+	}
+
+	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a:nth-of-type(even) {
+		@apply decoration-secondary;
+	}
+
+	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a:only-of-type {
+		@apply decoration-primary;
+	}
 }
 
 @layer components {

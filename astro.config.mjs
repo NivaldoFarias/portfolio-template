@@ -2,7 +2,6 @@ import { defineConfig } from "astro/config";
 
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
-import prefetch from "@astrojs/prefetch";
 import vercel from "@astrojs/vercel/static";
 
 // Markdown Plugins
@@ -15,7 +14,7 @@ import lightningcss from "vite-plugin-lightningcss";
 export default defineConfig({
 	output: "static",
 	adapter: vercel({ analytics: true }),
-	integrations: [tailwind(), mdx(), prefetch()],
+	integrations: [tailwind(), mdx()],
 	markdown: {
 		shikiConfig: {
 			theme: "rose-pine-moon",
