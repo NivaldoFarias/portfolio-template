@@ -11,6 +11,10 @@
 		@apply mx-0.5 !important;
 	}
 
+	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) :is(h1, h2, h3, h4, h5, h6) {
+		@apply relative;
+	}
+
 	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a {
 		@apply font-semibold underline decoration-2 underline-offset-2;
 	}
@@ -47,5 +51,17 @@
 
 	.animate-skeleton {
 		@apply relative isolate overflow-hidden  before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:border-t before:border-rose-100/10 before:bg-gradient-to-r before:from-transparent before:via-base-content/5 before:to-transparent;
+	}
+
+	a:has(.icon.icon-link) {
+		@apply inline-flex items-center;
+	}
+
+	:is(h1, h2, h3, h4, h5, h6):hover .icon.icon-link::after {
+		@apply content-['🔗'];
+	}
+
+	.icon.icon-link::after {
+		@apply content-[''] text-[1ch] h-full text-center absolute top-[25%] translate-x-2 transition-all opacity-50 animate-link-icon;
 	}
 }

@@ -1,5 +1,3 @@
-declare module "@fec/remark-a11y-emoji";
-
 export declare namespace Github {
     export interface GetRepository {
         id: number;

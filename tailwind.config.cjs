@@ -39,6 +39,7 @@ module.exports = {
 		extend: {
 			animation: {
 				text: "text 5s ease infinite",
+				"link-icon": "link-icon 500ms ease-in",
 			},
 			keyframes: {
 				text: {
@@ -54,6 +55,17 @@ module.exports = {
 				shimmer: {
 					"100%": {
 						transform: "translateX(100%)",
+					},
+				},
+				"link-icon": {
+					"0%": {
+						opacity: 0,
+					},
+					"50%": {
+						opacity: 0.25,
+					},
+					"100%": {
+						opacity: 0.5,
 					},
 				},
 			},
