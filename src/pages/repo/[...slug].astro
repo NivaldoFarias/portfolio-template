@@ -1,19 +1,57 @@
 ---
+import type { Github } from "../../types";
+
 import Markdown from "../../layouts/Markdown.astro";
-import { getCollection } from "astro:content";
+import escapeChars from "../../utils/escape";
 
-export async function getStaticPaths() {
-  const repoEntries = await getCollection("repo");
-  return repoEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
-}
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import a11yEmoji from "@fec/remark-a11y-emoji";
+import remarkGfm from "remark-gfm";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import rehypePrettyCode from "rehype-pretty-code";
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+if (!Astro.params.slug) return Astro.redirect("/404");
+
+const {
+  GITHUB_API_TOKEN: token,
+  GITHUB_API_URL: baseUrl,
+  GITHUB_API_OWNER: user,
+  GITHUB_API_VERSION: version,
+} = import.meta.env;
+const headers = {
+  Authorization: `Bearer ${token}`,
+  Accept: "application/vnd.github+json",
+  "X-GitHub-Api-Version": version,
+};
+
+const repoUrl = `${baseUrl}repos/${user}/${Astro.params.slug}`;
+const repoData = (await fetch(repoUrl, { headers })
+  .then((res) => res.json())
+  .catch((error) => console.error(error))) as Github.GetRepository | undefined;
+
+if (!repoData) return Astro.redirect("/404");
+const readmeUrl = `${baseUrl}repos/${user}/${Astro.params.slug}/readme`;
+const readme = (await fetch(readmeUrl, { headers })
+  .then((res) => res.json())
+  .catch((error) => console.error(error))) as Github.GetReadme | undefined;
+
+const file = await unified()
+  .use(remarkParse)
+  .use(a11yEmoji)
+  .use(remarkGfm)
+  .use(remarkRehype)
+  .use(rehypePrettyCode, {
+    theme: "rose-pine-moon",
+    keepBackground: true,
+  })
+  .use(rehypeStringify)
+  .process(
+    readme ? decodeURIComponent(escapeChars(atob(readme.content))) : "#No `README.md` found",
+  );
 ---
 
-<Markdown title={entry.data.title}>
-  <Content />
+<Markdown title={repoData.name || Astro.params.slug}>
+  <div set:html={file} />
 </Markdown>

@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-	:not(.astro-code) > code {
+	:not(pre) > code {
 		@apply rounded-md bg-neutral py-1 leading-none text-neutral-content !important;
 	}
 
-	:not(.astro-code) > code:not(:only-child) {
+	:not(pre) > code:not(:only-child) {
 		@apply mx-0.5 !important;
 	}
 

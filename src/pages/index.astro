@@ -1,5 +1,21 @@
 ---
+export const prerender = true;
+
 import DefaultLayout from "../layouts/DefaultLayout.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Home from "../components/Home.astro";
 ---
 
-<DefaultLayout title="Built with Astro 🚀" />
+<DefaultLayout title="Built with Astro 🚀">
+  <Navbar
+    href="/repo/test"
+    label="README"
+  />
+  <div class="flex justify-center">
+    <Sidebar />
+    <Home />
+  </div>
+  <Footer />
+</DefaultLayout>
