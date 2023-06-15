@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	:is(h1, h2, h3, h4, h5, h6) {
+		scroll-margin-block-start: 6rem;
+	}
+
 	:not(pre) > code {
 		@apply rounded-md bg-neutral py-1 leading-none text-neutral-content !important;
 	}
