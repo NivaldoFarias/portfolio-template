@@ -7,12 +7,17 @@
 		scroll-behavior: smooth;
 	}
 
+	::selection,
+	::-moz-selection {
+		@apply bg-accent text-accent-content;
+	}
+
 	:is(h1, h2, h3, h4, h5, h6) {
 		scroll-margin-block-start: 6rem;
 	}
 
 	:not(pre) > code {
-		@apply rounded-md bg-neutral py-1 leading-none text-neutral-content !important;
+		@apply rounded-md bg-neutral py-1 leading-none text-neutral-content whitespace-nowrap !important;
 	}
 
 	:not(pre) > code:not(:only-child) {
@@ -37,6 +42,10 @@
 
 	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a:only-of-type {
 		@apply decoration-primary;
+	}
+
+	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) p:is(:has(a ~ a), :has(img ~ img)) {
+		@apply flex gap-2 items-center;
 	}
 }
 
@@ -71,5 +80,9 @@
 
 	.icon.icon-link::after {
 		@apply content-[''] text-[1ch] h-full text-center absolute top-[25%] translate-x-2 transition-all opacity-50 animate-link-icon;
+	}
+
+	.badge {
+		@apply shadow-md inline-flex items-center justify-center py-3 font-semibold rounded-lg !important;
 	}
 }

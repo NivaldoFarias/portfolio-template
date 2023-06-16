@@ -1,28 +1,61 @@
 ---
+import { Icon } from "astro-icon";
+import { TAGS } from "../data/tags";
+
 export interface Props {
 	title: string;
 	body: string;
 	href: string;
+	tags: string[];
 }
 
-const { href, title, body } = Astro.props;
+const { href, title, body, tags } = Astro.props;
 ---
 
 <li
 	title={title}
-	class="rounded-lg w-full card bg-neutral-content/5 shadow-xl hover:bg-accent-content/5 transition-colors duration-300"
+	class="rounded-lg w-full card bg-neutral-content/5 shadow-xl"
 >
-	<a
-		target="_blank"
-		href={href}
-		class="card-body"
-	>
-		<h2 class="card-title">
-			{title}
-			<span>&rarr;</span>
-		</h2>
+	<div class="card-body">
+		<a
+			href={href}
+			class="w-fit hover:text-accent/95 transition-colors"
+		>
+			<h2 class="card-title">
+				{title}
+				<Icon
+					name="ic:baseline-arrow-right-alt"
+					height="22"
+					width="22"
+				/>
+			</h2>
+		</a>
 		<p class="justify-end card-actions">
 			{body}
 		</p>
-	</a>
+		<div class="flex gap-2 flex-wrap">
+			{
+				tags.map((tag) => {
+					return tag in TAGS ? (
+						<div
+							class={`flex gap-1 badge ${
+								tag in TAGS ? TAGS[tag as keyof typeof TAGS].class : "badge-outline"
+							}`}
+						>
+							{tag in TAGS ? (
+								<Icon
+									height="17"
+									width="17"
+									name={TAGS[tag as keyof typeof TAGS].icon}
+								/>
+							) : null}
+							<span>{tag}</span>
+						</div>
+					) : (
+						<div class="flex gap-1 badge badge-outline">{tag}</div>
+					);
+				})
+			}
+		</div>
+	</div>
 </li>

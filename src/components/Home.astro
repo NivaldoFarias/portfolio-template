@@ -1,24 +1,5 @@
 ---
-import type { Github } from "../types";
-
-import Card from "./Card.astro";
-
-const {
-  GITHUB_API_TOKEN: token,
-  GITHUB_API_URL: baseUrl,
-  GITHUB_API_OWNER: _user,
-  GITHUB_API_VERSION: version,
-} = import.meta.env;
-const headers = {
-  Authorization: `Bearer ${token}`,
-  Accept: "application/vnd.github+json",
-  "X-GitHub-Api-Version": version,
-};
-
-const url = `${baseUrl}user/repos`;
-const data = (await fetch(url, { method: "GET", headers })
-  .then((res) => res.json())
-  .catch((error) => console.error(error))) as Github.ListUserRepos | undefined;
+import CardGrid from "./CardGrid.astro";
 ---
 
 <main class="container max-w-2xl min-w-0 pr-2 pl-2 md:pr-6 md:pl-0 pt-4">
@@ -39,45 +20,5 @@ const data = (await fetch(url, { method: "GET", headers })
     </a>
     repository's <code>README.md</code> will be rendered as a page.
   </div>
-  <ul
-    role="list"
-    class="link-card-grid"
-  >
-    {
-      data
-        ? data.map((repo) => {
-            return ( 
-              repo.description && repo.description.length ? 
-                <Card
-                  href={`/repo/${repo.name}`}
-                  title={repo.name}
-                  body={repo.description}
-                /> 
-                : null
-            );
-          })
-        : (
-          <Card
-            href="https://github.com/NivaldoFarias"
-            title="Github Profile"
-            body="Explore the projects I've previously worked on."
-          />
-          <Card
-            href="https://astro.build/"
-            title="Astro"
-            body="This project was built with Astro. Explore their documentation."
-          />
-          <Card
-            href="https://daisyui.com/"
-            title="Themes"
-            body="Themes and color palettes powered by DaisyUI."
-          />
-          <Card
-            href="https://tailwindcss.com/"
-            title="Tailwind CSS"
-            body="All Styles and Layout are powered by Tailwind CSS."
-          />
-        )
-    }
-  </ul>
+  <CardGrid />
 </main>
