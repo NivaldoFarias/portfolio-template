@@ -62,12 +62,13 @@ const file = await unified()
   .process(
     readme ? decodeURIComponent(escapeChars(atob(readme.content))) : "#No `README.md` found",
   );
-
-if (!Astro.params.slug) return Astro.redirect("/404");
 ---
 
 <div class="flex justify-center pr-0 md:pr-[5.3rem]">
-  <Sidebar />
+  <Sidebar
+    title={repoData.name || Astro.params.slug}
+    headings={file.data.headings as Array<{ depth: number; value: string }>}
+  />
   <div
     class="px-4 prose pt-4"
     set:html={file}

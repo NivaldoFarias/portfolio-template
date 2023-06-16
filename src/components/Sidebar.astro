@@ -1,31 +1,99 @@
 ---
 import { Icon } from "astro-icon";
+
+export interface Props {
+  title: string;
+  headings: { depth: number; value: string }[];
+}
+
+const { headings, title } = Astro.props;
+
+const parsed = headings.map((heading) => ({
+  ...heading,
+  slug: heading.value
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, ""),
+}));
 ---
 
 <aside class="hidden p-4 md:block w-80 top-30 sticky h-full">
+  <div class="font-xl py-2 flex items-center gap-2">
+    <Icon
+      aria-label={title}
+      class="text-primary"
+      name="ph:scroll-fill"
+      height="22"
+      width="22"
+    />
+    <span>Table of Contents</span>
+  </div>
+
   <ul class="menu">
-    <li>
-      <a class="flex items-center gap-2">
-        <Icon
-          aria-label="Content"
-          class="text-primary"
-          name="ph:scroll-fill"
-          height="22"
-          width="22"
-        />
-        <span class="font-semibold opacity-80">Content</span>
-      </a>
-      <ul>
-        <li><a href="/">Home<span class="text-xl">&rarr;</span></a></li>
-        <li>
-          <span class="font-semibold opacity-80">Repositories</span>
-          <ul>
-            <li><a href="/repo/test">Test<span class="text-xl">&rarr;</span></a></li>
-            <li><a>Another Page</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
+    {
+      parsed.map((h, i) => {
+        if (h.depth === 1 || h.depth === 6) return null;
+
+        // find index of next heading of a level smaller of equal to current, slice to that
+        // if the index equals to array end, it means the current heading doesn't have any children
+
+        const getChildren = (child: typeof h) => {
+          const next = parsed
+            .slice(i + 1)
+            .findIndex((h2) => h2.depth < child.depth || h2.depth === h.depth);
+          const children = next === -1 ? [] : parsed.slice(i + 1, i + 1 + next);
+          if (child.depth === 2) console.log(children);
+          return children;
+        };
+
+        return (
+          <li>
+            <a
+              href={`#${h.slug}`}
+              class="flex items-center gap-2 opacity-80 hover:opacity-100"
+            >
+              <span class="font-semibold ">{h.value}</span>
+              <span class="opacity-50">{getChildren(h).length}</span>
+            </a>
+            {getChildren(h).length > 0 ? (
+              <ul>
+                {getChildren(h)
+                  .filter((h2) => h2.depth !== 6 && h2.slug !== h.slug)
+                  .map((h2) => (
+                    <li>
+                      <a
+                        href={`#${h2.slug}`}
+                        class="flex items-center gap-2 text-sm opacity-80 hover:opacity-100"
+                      >
+                        <span class="font-semibold">{h2.value}</span>
+                      </a>
+                      {getChildren(h2).length > 0 ? (
+                        <ul>
+                          {getChildren(h2)
+                            .filter((h3) => h3.depth !== 6 && h2.slug !== h3.slug)
+                            .map((h3) => (
+                              <li>
+                                <a
+                                  href={`#${h3.slug}`}
+                                  class="flex items-center gap-2 text-sm opacity-80 hover:opacity-100"
+                                >
+                                  <span class="font-semibold">{h3.value}</span>
+                                </a>
+                              </li>
+                            ))}
+                        </ul>
+                      ) : null}
+                    </li>
+                  ))}
+              </ul>
+            ) : null}
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <ul class="menu">
     <div class="divider"></div>
     <li>
       <a class="flex items-center gap-2">

@@ -15,10 +15,11 @@ const headers = {
   "X-GitHub-Api-Version": version,
 };
 
+
 const url = `${baseUrl}user/repos`;
-const data = (await fetch(url, { method: "GET", headers })
+const data: Github.ListUserRepos | undefined = await fetch(url, { method: "GET", headers })
   .then((res) => res.json())
-  .catch((error) => console.error(error))) as Github.ListUserRepos | undefined;
+  .catch((error) => console.error(error))
 ---
 
 <ul
