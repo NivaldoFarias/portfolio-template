@@ -5,8 +5,8 @@ import { THEMES } from "../data/themes";
 import ColorPalette from "./ColorPalette.astro";
 ---
 
-<div class="sticky top-0 z-30 mb-4 w-screen">
-  <nav class="w-full h-16 pt-3 pr-4 transition-all navbar bg-base-100 bg-opacity-70 backdrop-blur">
+<div class="sticky top-0 z-30 mb-4 w-screen bg-base-100 bg-opacity-70 backdrop-blur">
+  <nav class="w-full h-16 pt-3 pr-4 transition-all navbar">
     <div class="flex-1">
       <div class="flex-none lg:hidden">
         <label
@@ -50,7 +50,7 @@ import ColorPalette from "./ColorPalette.astro";
         />
       </button>
       <div
-        class="dropdown-content text-base-content menu shadow bg-base-200 rounded-box w-56 overflow-y-auto top-px h-[70vh] max-h-96 mt-8"
+        class="dropdown-content text-base-content menu shadow bg-base-200 rounded-box w-56 overflow-y-auto top-px h-[70vh] max-h-96 mt-4"
       >
         <div class="flex flex-col gap-3 p-2">
           {
@@ -67,5 +67,5 @@ import ColorPalette from "./ColorPalette.astro";
       </div>
     </div>
   </nav>
-  <div class="m-0 divider"></div>
+  <div class="m-0 divider h-[1px]"></div>
 </div>

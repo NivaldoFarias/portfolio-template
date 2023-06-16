@@ -1,69 +1,17 @@
 ---
-import type { Github } from "../../types/";
-
+import MarkdownWrapper from "../../components/MarkdownWrapper.astro";
+import Footer from "../../components/Footer.astro";
+import Navbar from "../../components/Navbar.astro";
 import Markdown from "../../layouts/Markdown.astro";
-import escapeChars from "../../utils/escape";
-
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import a11yEmoji from "@fec/remark-a11y-emoji";
-import sectionize from "remark-sectionize";
-import remarkGfm from "remark-gfm";
-import remarkRehype from "remark-rehype";
-import remarkHeadings from "@vcarl/remark-headings";
-
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeStringify from "rehype-stringify";
-import rehypePrettyCode from "rehype-pretty-code";
 
 if (!Astro.params.slug) return Astro.redirect("/404");
-
-const {
-  GITHUB_API_TOKEN: token,
-  GITHUB_API_URL: baseUrl,
-  GITHUB_API_OWNER: user,
-  GITHUB_API_VERSION: version,
-} = import.meta.env;
-const headers = {
-  Authorization: `Bearer ${token}`,
-  Accept: "application/vnd.github+json",
-  "X-GitHub-Api-Version": version,
-};
-
-const repoUrl = `${baseUrl}repos/${user}/${Astro.params.slug}`;
-const repoData = (await fetch(repoUrl, { headers })
-  .then((res) => res.json())
-  .catch((error) => console.error(error))) as Github.GetRepository | undefined;
-
-if (!repoData) return Astro.redirect("/404");
-const readmeUrl = `${baseUrl}repos/${user}/${Astro.params.slug}/readme`;
-const readme = (await fetch(readmeUrl, { headers })
-  .then((res) => res.json())
-  .catch((error) => console.error(error))) as Github.GetReadme | undefined;
-
-const file = await unified()
-  .use(remarkParse)
-  .use(remarkHeadings)
-  .use(sectionize)
-  .use(a11yEmoji)
-  .use(remarkGfm)
-  .use(remarkRehype)
-  .use(rehypeSlug)
-  .use(rehypeStringify)
-  .use(rehypePrettyCode, {
-    theme: "rose-pine-moon",
-    keepBackground: true,
-  })
-  .use(rehypeAutolinkHeadings, {
-    behavior: "append",
-    properties: { ariaHidden: false, tabIndex: 0 },
-  })
-  .process(
-    readme ? decodeURIComponent(escapeChars(atob(readme.content))) : "#No `README.md` found",
-  );
 ---
 
-<Markdown title={repoData.name || Astro.params.slug}>
-  <div set:html={file} />
+<Markdown title={Astro.params.slug}>
+  <Navbar
+    href="/"
+    label="Home"
+  />
+  <MarkdownWrapper />
+  <Footer />
 </Markdown>

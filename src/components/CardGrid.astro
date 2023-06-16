@@ -29,12 +29,12 @@ const data = (await fetch(url, { method: "GET", headers })
     data
       ? data.map((repo) => {
           return ( 
-            repo.description && repo.description.length ? 
+            repo.fork === false && repo.private === false ? 
               <Card
                 href={`/repo/${repo.name}`}
                 title={repo.name}
-                body={repo.description}
-                tags={repo.topics}
+                body={repo.description || ""}
+                tags={repo.topics && repo.topics.length ? repo.topics : [repo.language?.toLowerCase() || ""]}
               /> 
               : null
           );
