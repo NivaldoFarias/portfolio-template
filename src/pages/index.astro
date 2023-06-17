@@ -2,13 +2,13 @@
 export const prerender = true;
 
 import DefaultLayout from "../layouts/DefaultLayout.astro";
-import Navbar from "../components/Navbar.astro";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import Home from "../components/Home.astro";
+import Home from "../components/Home/index.astro";
 ---
 
 <DefaultLayout title="Built with Astro 🚀">
-  <Navbar
+  <Header
     href="/repo/test"
     label="README"
   />

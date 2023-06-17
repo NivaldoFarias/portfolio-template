@@ -6,8 +6,8 @@ import ColorPalette from "./ColorPalette.astro";
 ---
 
 <div class="sticky top-0 z-30 mb-4 w-screen bg-base-100 bg-opacity-70 backdrop-blur">
-  <nav class="w-full h-16 pt-3 pr-4 transition-all navbar">
-    <div class="flex-1">
+  <div class="navbar">
+    <nav class="w-full h-16 pt-1 px-8 transition-all">
       <div class="flex-none lg:hidden">
         <label
           for="drawer"
@@ -29,28 +29,27 @@ import ColorPalette from "./ColorPalette.astro";
           </svg>
         </label>
       </div>
-      <kbd class="text-xl kbd">placeholder</kbd>
-    </div>
+      <a href="/">
+        <kbd class="text-xl kbd px-4">home</kbd>
+      </a>
+    </nav>
 
     <div
       title="Change theme"
       class="z-30 dropdown dropdown-bottom dropdown-end"
     >
-      <button class="normal-case btn btn-ghost">
+      <button
+        class="normal-case flex gap-2 items-center min-w-max flex-row whitespace-nowrap btn btn-ghost"
+      >
         <Icon
           name="ph:swatches"
           height="28"
           width="28"
         />
         <span class="text-lg fancy-text">Theme</span>
-        <Icon
-          name="ph:caret-down-bold"
-          height="16"
-          width="16"
-        />
       </button>
       <div
-        class="dropdown-content text-base-content menu shadow bg-base-200 rounded-box w-56 overflow-y-auto top-px h-[70vh] max-h-96 mt-4"
+        class="dropdown-content text-base-content menu shadow bg-base-200 rounded-box w-56 overflow-y-auto top-px h-[70vh] max-h-96 mt-8"
       >
         <div class="flex flex-col gap-3 p-2">
           {
@@ -66,6 +65,6 @@ import ColorPalette from "./ColorPalette.astro";
         </div>
       </div>
     </div>
-  </nav>
+  </div>
   <div class="m-0 divider h-[1px]"></div>
 </div>

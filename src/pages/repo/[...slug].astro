@@ -1,14 +1,14 @@
 ---
 import MarkdownWrapper from "../../components/MarkdownWrapper.astro";
 import Footer from "../../components/Footer.astro";
-import Navbar from "../../components/Navbar.astro";
+import Header from "../../components/Header.astro";
 import Markdown from "../../layouts/Markdown.astro";
 
 if (!Astro.params.slug) return Astro.redirect("/404");
 ---
 
 <Markdown title={Astro.params.slug}>
-  <Navbar
+  <Header
     href="/"
     label="Home"
   />

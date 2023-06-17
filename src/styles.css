@@ -7,6 +7,36 @@
 		scroll-behavior: smooth;
 	}
 
+	summary {
+		@apply pl-4 pr-2 py-2 flex w-full justify-between items-center pointer-events-auto cursor-pointer !important;
+	}
+
+	summary > a:hover {
+		@apply underline decoration-2 decoration-accent underline-offset-2;
+	}
+
+	summary:after {
+		@apply block mt-[-0.5rem] cursor-pointer h-2 w-2 rotate-45 transition-transform duration-300 justify-self-end text-secondary;
+	}
+
+	summary.marker-alt:after {
+		@apply text-accent;
+	}
+
+	summary:after {
+		transition-property: transform, margin-top;
+		content: "";
+		pointer-events: all;
+		box-shadow: 2px 2px;
+		transform-origin: 75% 75%;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	details[open] > summary:after {
+		transform: rotate(225deg);
+		margin-top: 0;
+	}
+
 	::selection,
 	::-moz-selection {
 		@apply bg-accent text-accent-content;
@@ -99,11 +129,22 @@
 		@apply top-[5%];
 	}
 
+	:is(h4, h5, h6) .icon.icon-link::after {
+		@apply text-[1.2ch];
+	}
+
 	.icon.icon-link::after {
 		@apply content-[''] text-[1ch] h-full text-center absolute top-[25%] translate-x-2 transition-all opacity-50 animate-link-icon;
 	}
 
 	.badge {
 		@apply shadow-md inline-flex items-center justify-center py-3 font-semibold rounded-lg !important;
+	}
+
+	.menu
+		:where(li:not(.menu-title):not(.disabled) > :not(ul):not(details):not(.menu-title)):not(
+			.active
+		):hover {
+		@apply underline decoration-2 decoration-accent underline-offset-2 outline-none bg-transparent !important;
 	}
 }

@@ -1,6 +1,6 @@
 ---
 import type { Github } from "../types/";
-import Sidebar from "../components/Sidebar.astro";
+import TableOfContents from "./TableOfContents.astro";
 
 import escapeChars from "../utils/escape";
 
@@ -65,7 +65,7 @@ const file = await unified()
 ---
 
 <div class="flex justify-center pr-0 md:pr-[5.3rem]">
-  <Sidebar
+  <TableOfContents
     title={repoData.name || Astro.params.slug}
     headings={file.data.headings as Array<{ depth: number; value: string }>}
   />
