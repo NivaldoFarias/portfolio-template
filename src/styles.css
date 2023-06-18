@@ -7,6 +7,10 @@
 		scroll-behavior: smooth;
 	}
 
+	html {
+		@apply min-w-min;
+	}
+
 	summary {
 		@apply pl-4 pr-2 py-2 flex w-full justify-between items-center pointer-events-auto cursor-pointer !important;
 	}
@@ -54,43 +58,45 @@
 		scroll-margin-block-start: 6rem;
 	}
 
-	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) section {
-		@apply pl-4 border-l-2 border-accent/10 rounded-lg;
+	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) section {
+		@apply md:pl-4 md:border-l-2 md:border-accent/10 md:rounded-lg;
 	}
 
-	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) :is(h1, h2, h3, h4, h5, h6) {
+	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) :is(h1, h2, h3, h4, h5, h6) {
 		@apply relative;
 	}
 
-	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) h5 {
+	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) h5 {
 		@apply mt-3 mb-2 font-semibold text-base;
 	}
 
-	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) h6 {
+	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) h6 {
 		@apply text-sm;
 	}
 
-	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a {
+	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) a {
 		@apply font-semibold underline decoration-2 underline-offset-2;
 	}
 
-	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a:nth-of-type(odd) {
+	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) a:nth-of-type(odd) {
 		@apply decoration-accent;
 	}
 
-	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a:nth-of-type(even) {
+	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) a:nth-of-type(even) {
 		@apply decoration-secondary;
 	}
 
-	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) a:only-of-type {
+	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) a:only-of-type {
 		@apply decoration-primary;
 	}
 
-	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) p:is(:has(a > img), :has(img ~ img)) {
+	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) p:is(:has(a > img), :has(img ~ img)) {
 		@apply flex gap-2 items-center flex-wrap;
 	}
 
-	:is(.prose, .prose-sm, .prose-md, .prose-xl, .prose-lg) p:is(:has(a > img), :has(img ~ img)) img {
+	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg)
+		p:is(:has(a > img), :has(img ~ img))
+		img {
 		@apply m-0;
 	}
 }
@@ -101,7 +107,7 @@
 	}
 
 	.link-card-grid {
-		@apply grid grid-cols-2 gap-3 p-0 min-h-[8rem] min-w-[16rem];
+		@apply grid grid-cols-1 sm:grid-cols-2 gap-3 p-0 min-h-[8rem] min-w-[16rem];
 	}
 
 	.fancy-text {
@@ -146,5 +152,33 @@
 			.active
 		):hover {
 		@apply underline decoration-2 decoration-accent underline-offset-2 outline-none bg-transparent !important;
+	}
+
+	.theme-change-menu::after {
+		@apply block mt-[-0.5rem] cursor-pointer h-2 w-2 rotate-45 transition-transform duration-300 justify-self-end;
+	}
+
+	.theme-change-menu::after {
+		transition-property: transform, margin-top;
+		content: "";
+		pointer-events: all;
+		box-shadow: 2px 2px;
+		transform-origin: 75% 75%;
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.theme-change-menu:is(:focus, :focus-within, :focus-visible, )::after,
+	.dropdown-content:is(
+			:focus,
+			:focus-within,
+			:focus-visible,
+			:has(
+					div:is(:focus, :focus-within, :focus-visible),
+					button:is(:focus, :focus-within, :focus-visible, :active, :hover)
+				)
+		)
+		+ .theme-change-menu::after {
+		transform: rotate(225deg);
+		margin-top: 0;
 	}
 }

@@ -5,30 +5,9 @@ import { THEMES } from "src/data/themes";
 import ColorPalette from "./ColorPalette.astro";
 ---
 
-<div class="sticky top-0 z-30 mb-4 w-screen bg-base-100 bg-opacity-70 backdrop-blur">
+<div class="sticky top-0 z-30 mb-4 min-w-full bg-base-100 bg-opacity-70 backdrop-blur">
   <div class="navbar px-4">
     <nav class="w-full h-16 pt-1 transition-all">
-      <div class="flex-none lg:hidden">
-        <label
-          for="drawer"
-          class="btn btn-square btn-ghost"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            class="inline-block w-6 h-6 stroke-current"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            >
-            </path>
-          </svg>
-        </label>
-      </div>
       <a href="/">
         <kbd class="text-xl kbd px-3">home</kbd>
       </a>
@@ -39,7 +18,7 @@ import ColorPalette from "./ColorPalette.astro";
       class="z-30 dropdown dropdown-bottom dropdown-end pr-2"
     >
       <button
-        class="normal-case flex gap-2 items-center min-w-max flex-row whitespace-nowrap btn btn-ghost"
+        class="normal-case flex gap-2 items-center min-w-max flex-row whitespace-nowrap btn btn-ghost theme-change-menu"
       >
         <Icon
           name="ph:swatches"
