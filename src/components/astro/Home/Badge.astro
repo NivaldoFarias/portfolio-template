@@ -1,0 +1,20 @@
+---
+import { Icon } from "astro-icon";
+
+import type { Tags } from "src/data/tags";
+
+export interface Props {
+	tag: Tags[keyof Tags];
+}
+
+const { tag } = Astro.props;
+---
+
+<div class={`flex gap-1 badge ${tag.class}`}>
+	<Icon
+		height="17"
+		width="17"
+		name={tag.icon}
+	/>
+	<span>{tag.label}</span>
+</div>

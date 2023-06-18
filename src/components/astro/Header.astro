@@ -1,13 +1,13 @@
 ---
 import { Icon } from "astro-icon";
-import { THEMES } from "../data/themes";
+import { THEMES } from "src/data/themes";
 
 import ColorPalette from "./ColorPalette.astro";
 ---
 
 <div class="sticky top-0 z-30 mb-4 w-screen bg-base-100 bg-opacity-70 backdrop-blur">
-  <div class="navbar">
-    <nav class="w-full h-16 pt-1 px-8 transition-all">
+  <div class="navbar px-4">
+    <nav class="w-full h-16 pt-1 transition-all">
       <div class="flex-none lg:hidden">
         <label
           for="drawer"
@@ -30,13 +30,13 @@ import ColorPalette from "./ColorPalette.astro";
         </label>
       </div>
       <a href="/">
-        <kbd class="text-xl kbd px-4">home</kbd>
+        <kbd class="text-xl kbd px-3">home</kbd>
       </a>
     </nav>
 
     <div
       title="Change theme"
-      class="z-30 dropdown dropdown-bottom dropdown-end"
+      class="z-30 dropdown dropdown-bottom dropdown-end pr-2"
     >
       <button
         class="normal-case flex gap-2 items-center min-w-max flex-row whitespace-nowrap btn btn-ghost"

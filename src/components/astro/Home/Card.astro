@@ -1,6 +1,8 @@
 ---
 import { Icon } from "astro-icon";
-import { TAGS } from "../../data/tags";
+
+import { TAGS } from "src/data/tags";
+import Badge from "./Badge.astro";
 
 export interface Props {
 	title: string;
@@ -37,20 +39,7 @@ const { href, title, body, tags } = Astro.props;
 			{
 				tags.map((tag) => {
 					return tag in TAGS ? (
-						<div
-							class={`flex gap-1 badge ${
-								tag in TAGS ? TAGS[tag as keyof typeof TAGS].class : "badge-outline"
-							}`}
-						>
-							{tag in TAGS ? (
-								<Icon
-									height="17"
-									width="17"
-									name={TAGS[tag as keyof typeof TAGS].icon}
-								/>
-							) : null}
-							<span>{tag}</span>
-						</div>
+						<Badge tag={TAGS[tag as keyof typeof TAGS]} />
 					) : (
 						<div class="flex gap-1 badge badge-outline">{tag}</div>
 					);
