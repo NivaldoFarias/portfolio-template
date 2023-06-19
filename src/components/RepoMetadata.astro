@@ -1,0 +1,276 @@
+---
+import { Icon } from "astro-icon";
+
+const params = Astro.url.searchParams;
+
+const data = {
+  size: params.get("size") || "0",
+  topics: params.get("topics") || [],
+  language: params.get("language") || "N/A",
+  stargazers: params.get("stargazers") || 0,
+  homepage_url: params.get("homepage") || "N/A",
+  created_at: params.get("created_at") ? new Date(String(params.get("created_at"))) : "N/A",
+  updated_at: params.get("updated_at")
+    ? toRelativeTime(new Date(String(params.get("updated_at"))))
+    : "N/A",
+};
+
+function toRelativeTime(date: Date) {
+  const bestFittingUnit = (seconds: number) => {
+    const SECOND = 1;
+    const MINUTE = 60 * SECOND;
+    const HOUR = 60 * MINUTE;
+    const DAY = 24 * HOUR;
+    const MONTH = 30 * DAY;
+    const YEAR = 365 * DAY;
+
+    if (seconds >= YEAR) {
+      return { value: seconds / YEAR, unit: "year" };
+    }
+    if (seconds >= MONTH) {
+      return { value: seconds / MONTH, unit: "month" };
+    }
+    if (seconds >= DAY) {
+      return { value: seconds / DAY, unit: "day" };
+    }
+    if (seconds >= HOUR) {
+      return { value: seconds / HOUR, unit: "hour" };
+    }
+    if (seconds >= MINUTE) {
+      return { value: seconds / MINUTE, unit: "minute" };
+    }
+    return { value: seconds, unit: "second" };
+  };
+
+  const { value, unit } = bestFittingUnit((Date.now() - date.getTime()) / 1000);
+
+  return new Intl.RelativeTimeFormat().format(
+    -Math.round(value),
+    unit as Intl.RelativeTimeFormatUnit,
+  );
+}
+---
+
+<repo-metadata
+  class="stats bg-neutral text-neutral-content drop-shadow-lg w-full max-w-[35rem] self-center"
+  data-stargazers={data.stargazers}
+  data-created={data.created_at}
+  data-size={data.size}
+  data-homepage={data.homepage_url}
+>
+  <div class="stat">
+    <div class="stat-title text-neutral-content/40 font-semibold">Github stars</div>
+    <div class="stat-value flex gap-2 items-center text-primary">
+      <span class="countdown text-[1.7rem] pt-0.5">
+        <span
+          id="stargazers-counter"
+          style="--value:0;"
+        >
+        </span>
+      </span>
+      <Icon
+        id="stargazers-btn"
+        name="mdi:star-outline"
+        height="28"
+        width="28"
+        class="cursor-pointer pointer-events-auto"
+      />
+    </div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title text-neutral-content/40 font-semibold">First commit</div>
+    <div class="stat-value text-secondary countdown">
+      <span
+        id="created-at-day"
+        style="--value:0;"
+      >
+      </span>
+      /
+      <span
+        id="created-at-hour"
+        style="--value:0;"
+      >
+      </span>
+      /
+      <span
+        id="created-at-millenium"
+        style="--value:0;"
+      >
+      </span>
+      <span
+        id="created-at-decade"
+        style="--value:0;"
+      >
+      </span>, &nbsp;
+      <span
+        id="created-at-hours"
+        style="--value:0;"
+      >
+      </span>
+      :
+      <span
+        id="created-at-minutes"
+        style="--value:0;"
+      >
+      </span>
+      :
+      <span
+        id="created-at-seconds"
+        style="--value:0;"
+      >
+      </span>
+    </div>
+    <div class="stat-desc">Last updated {data.updated_at}</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-title text-neutral-content/40 font-semibold">Data size</div>
+    <div class="stat-value text-accent countdown">
+      {
+        data.size.match(/.{1,2}/g)?.map((_segment, i) => {
+          return (
+            <span
+              id={"size-segment-" + i.toString()}
+              style="--value:0;"
+            />
+          );
+        })
+      }
+      KB
+    </div>
+  </div>
+</repo-metadata>
+
+<script>
+  import confetti from "canvas-confetti";
+
+  class RepoMetadata extends HTMLElement {
+    constructor() {
+      super();
+      const data = {
+        stargazers: this.dataset.stargazers ? Number(this.dataset.stargazers) : 0,
+        createdAt: this.dataset.created ? new Date(this.dataset.created) : new Date(),
+        size: this.dataset.size ? this.dataset.size : "0",
+        homepage_url: this.dataset.homepage ? this.dataset.homepage : "N/A",
+      };
+      const btn = document.getElementById("stargazers-btn");
+      if (btn)
+        btn.addEventListener("click", () => {
+          const count = 200;
+          const defaults = {
+            origin: { y: 0.7 },
+          };
+
+          const fire = (particleRatio: number, opts: Record<string, number>) => {
+            confetti(
+              Object.assign({}, defaults, opts, {
+                particleCount: Math.floor(count * particleRatio),
+              }),
+            );
+          };
+
+          const confettiSpread = () => {
+            fire(0.25, {
+              spread: 26,
+              startVelocity: 55,
+            });
+            fire(0.2, {
+              spread: 60,
+            });
+            fire(0.35, {
+              spread: 100,
+              decay: 0.91,
+              scalar: 0.8,
+            });
+            fire(0.1, {
+              spread: 120,
+              startVelocity: 25,
+              decay: 0.92,
+              scalar: 1.2,
+            });
+            fire(0.1, {
+              spread: 120,
+              startVelocity: 45,
+            });
+          };
+
+          confettiSpread();
+          setTimeout(() => {
+            window.open(data.homepage_url, "_blank");
+          }, 1000);
+        });
+
+      let stargazers = this.dataset.stargazers ? Number(this.dataset.stargazers) : 0;
+
+      if (stargazers > 0) {
+        setTimeout(() => {
+          document
+            .getElementById("stargazers-counter")
+            ?.style.setProperty("--value", String(stargazers));
+        }, 500);
+      }
+
+      if (data.createdAt) {
+        const time = dateToTime(data.createdAt);
+
+        setTimeout(() => {
+          document.getElementById("created-at-day")?.style.setProperty("--value", String(time.day));
+          document
+            .getElementById("created-at-hour")
+            ?.style.setProperty("--value", String(time.hour));
+          document
+            .getElementById("created-at-millenium")
+            ?.style.setProperty("--value", time.millenium);
+          document.getElementById("created-at-decade")?.style.setProperty("--value", time.decade);
+          document
+            .getElementById("created-at-hours")
+            ?.style.setProperty("--value", String(time.hour));
+          document
+            .getElementById("created-at-minutes")
+            ?.style.setProperty("--value", String(time.minute));
+          document
+            .getElementById("created-at-seconds")
+            ?.style.setProperty("--value", String(time.second));
+        }, 500);
+      }
+
+      if (data.size) {
+        const segments: string[] = [];
+
+        for (let i = 0; i < data.size.length; ) {
+          if (i === 0) {
+            segments.push(data.size.substring(i, 1));
+            i++;
+          } else {
+            segments.push(data.size.substring(i, i + 2));
+            i += 2;
+          }
+        }
+
+        if (segments) {
+          setTimeout(() => {
+            segments.map((segment, i) => {
+              document
+                .getElementById("size-segment-" + i.toString())
+                ?.style.setProperty("--value", segment);
+            });
+          }, 500);
+        }
+      }
+
+      function dateToTime(date: Date) {
+        return {
+          day: date.getDate(),
+          hour: date.getHours(),
+          minute: date.getMinutes(),
+          second: date.getSeconds(),
+          millenium: String(date.getFullYear()).substring(0, 2),
+          decade: String(date.getFullYear()).substring(2),
+        };
+      }
+    }
+  }
+
+  customElements.define("repo-metadata", RepoMetadata);
+</script>

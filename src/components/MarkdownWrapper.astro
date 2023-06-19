@@ -1,6 +1,8 @@
 ---
 import type { Github } from "src/types/";
+
 import TableOfContents from "./TableOfContents.astro";
+import RepoMetadata from "./RepoMetadata.astro";
 
 import escapeChars from "src/utils/escape";
 
@@ -31,20 +33,16 @@ const headers = {
   "X-GitHub-Api-Version": version,
 };
 
-const repoUrl = `${baseUrl}repos/${user}/${Astro.params.slug}`;
-const repoData = (await fetch(repoUrl, { headers })
-  .then((res) => res.json())
-  .catch((error) => console.error(error))) as Github.GetRepository | undefined;
-
-if (!repoData) return Astro.redirect("/404");
-const readmeUrl = `${baseUrl}repos/${user}/${Astro.params.slug}/readme`;
-const readme = (await fetch(readmeUrl, { headers })
+const url = `${baseUrl}repos/${user}/${Astro.params.slug}/readme`;
+const res = (await fetch(url, { headers })
   .then((res) => res.json())
   .catch((error) => console.error(error))) as Github.GetReadme | undefined;
 
+if (!res) return Astro.redirect("/404");
+
 const file = await unified()
   .use(remarkParse)
-  .use(firstHeading, { heading: repoData.name || Astro.params.slug })
+  .use(firstHeading, { heading: Astro.params.slug })
   .use(remarkHeadings)
   .use(sectionize)
   .use(remarkGfm)
@@ -60,17 +58,22 @@ const file = await unified()
     properties: { ariaHidden: false, tabIndex: 0 },
   })
   .process(
-    readme ? decodeURIComponent(escapeChars(atob(readme.content))) : "#No `README.md` found",
+    res.content
+      ? decodeURIComponent(escapeChars(atob(res.content)))
+      : "No `README.md` file was found for this repository.",
   );
 ---
 
 <div class="flex justify-center pr-0 md:pr-[5.3rem]">
   <TableOfContents
-    title={repoData.name || Astro.params.slug}
+    title={Astro.params.slug}
     headings={file.data.headings as Array<{ depth: number; value: string }>}
   />
-  <div
-    class="px-4 prose pt-4"
-    set:html={file}
-  />
+  <div class="relative min-w-0 lg:min-w-[35rem] flex flex-col">
+    <RepoMetadata />
+    <div
+      class="px-4 prose pt-4"
+      set:html={file}
+    />
+  </div>
 </div>

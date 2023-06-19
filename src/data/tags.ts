@@ -24,7 +24,7 @@ export const TAGS = {
 	jsonwebtoken: { label: "JWT", icon: "simple-icons:jsonwebtokens", class: "badge-accent" },
 	redis: { label: "Redis", icon: "cib:redis", class: "badge-error" },
 	graphql: { label: "GraphQL", icon: "mdi:language-graphql", class: "badge-secondary" },
-	nextjs: { label: "Next.js", icon: "file-icons:nextjs", class: "badge-primary" },
+	nextjs: { label: "Next.js", icon: "file-icons:nextjs", class: "badge-neutral" },
 	gatsby: { label: "Gatsby", icon: "mdi:language-gatsby", class: "badge-secondary" },
 	nuxtjs: { label: "Nuxt.js", icon: "mdi:language-nuxtjs", class: "badge-accent" },
 	tailwindcss: { label: "TailwindCSS", icon: "simple-icons:tailwindcss", class: "badge-info" },

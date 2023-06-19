@@ -6,7 +6,7 @@ import Card from "./Card.astro";
 const {
   GITHUB_API_TOKEN: token,
   GITHUB_API_URL: baseUrl,
-  GITHUB_API_OWNER: _user,
+  GITHUB_API_OWNER: user,
   GITHUB_API_VERSION: version,
 } = import.meta.env;
 const headers = {
@@ -16,7 +16,7 @@ const headers = {
 };
 
 
-const url = `${baseUrl}user/repos`;
+const url = `${baseUrl}users/${user}/repos?per_page=100&sort=created`;
 const data: Github.ListUserRepos | undefined = await fetch(url, { method: "GET", headers })
   .then((res) => res.json())
   .catch((error) => console.error(error))
@@ -32,7 +32,7 @@ const data: Github.ListUserRepos | undefined = await fetch(url, { method: "GET",
           return ( 
             repo.fork === false && repo.private === false ? 
               <Card
-                href={`/repo/${repo.name}`}
+                href={`/repo/${repo.name}?stargazers=${repo.stargazers_count}&created_at=${repo.created_at}&updated_at=${repo.updated_at}&language=${repo.language}&topics=${repo.topics}&size=${repo.size}&homepage=${repo.html_url}`}
                 title={repo.name}
                 body={repo.description || ""}
                 tags={repo.topics && repo.topics.length ? repo.topics : [repo.language?.toLowerCase() || ""]}
