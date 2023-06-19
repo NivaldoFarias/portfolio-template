@@ -18,6 +18,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeStringify from "rehype-stringify";
 import rehypePrettyCode from "rehype-pretty-code";
+import rehypeExternalLinks from "rehype-external-links";
 
 if (!Astro.params.slug) return Astro.redirect("/404");
 
@@ -49,6 +50,10 @@ const file = await unified()
   .use(remarkRehype)
   .use(rehypeSlug)
   .use(rehypeStringify)
+  .use(rehypeExternalLinks, {
+    rel: ["external"],
+    target: "_blank",
+  })
   .use(rehypePrettyCode, {
     theme: "rose-pine-moon",
     keepBackground: true,
@@ -64,7 +69,7 @@ const file = await unified()
   );
 ---
 
-<div class="flex justify-center pr-0 md:pr-[5.3rem]">
+<div class="flex justify-center pr-0 md:pr-[5.3rem] relative">
   <TableOfContents
     title={Astro.params.slug}
     headings={file.data.headings as Array<{ depth: number; value: string }>}

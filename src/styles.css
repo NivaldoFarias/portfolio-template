@@ -47,7 +47,7 @@
 	}
 
 	:not(pre) > code {
-		@apply rounded-md bg-neutral py-1 leading-none text-neutral-content whitespace-nowrap !important;
+		@apply rounded-md bg-neutral py-1 leading-4 text-neutral-content max-w-fit inline-block !important;
 	}
 
 	:not(pre) > code:not(:only-child) {
@@ -98,6 +98,13 @@
 		p:is(:has(a > img), :has(img ~ img))
 		img {
 		@apply m-0;
+	}
+
+	aside {
+		height: 100%;
+		height: -moz-available;
+		height: -webkit-fill-available;
+		height: stretch;
 	}
 }
 

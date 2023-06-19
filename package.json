@@ -20,6 +20,7 @@
 		"canvas-confetti": "^1.6.0",
 		"daisyui": "^3.1.1",
 		"rehype-autolink-headings": "^6.1.1",
+		"rehype-external-links": "^2.1.0",
 		"rehype-pretty-code": "^0.9.9",
 		"rehype-slug": "^5.1.0",
 		"remark-first-heading": "^2.0.3",
