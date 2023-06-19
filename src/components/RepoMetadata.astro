@@ -286,5 +286,16 @@ function toRelativeTime(date: Date) {
     }
   }
 
+  setAnchorLinksClipboard();
   customElements.define("repo-metadata", RepoMetadata);
+
+  function setAnchorLinksClipboard() {
+    const anchors = document.querySelectorAll("a:has(> span.icon.icon-link)");
+
+    for (const anchor of anchors) {
+      if (!(anchor instanceof HTMLAnchorElement)) continue;
+
+      anchor.addEventListener("click", () => navigator.clipboard.writeText(anchor.href));
+    }
+  }
 </script>

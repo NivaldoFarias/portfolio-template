@@ -21,7 +21,8 @@ const data: Github.ListUserRepos | undefined = await fetch(url, { method: "GET",
   .then((res) => res.json())
   .catch((error) => console.error(error))
 
-const sortedByStargazersCount = data?.sort((a, b) => b.stargazers_count - a.stargazers_count);
+const repoPriority = "portfolio-dashboard";
+const sortedByStargazersCount = data?.sort((a, b) => b.name === repoPriority ? 1 : b.stargazers_count - a.stargazers_count);
 ---
 
 <ul

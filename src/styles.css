@@ -5,10 +5,19 @@
 @layer base {
 	html {
 		scroll-behavior: smooth;
+		/* scroll-timeline-name: sidemenu-timeline;
+		scroll-timeline-axis: vertical; */
 	}
 
 	html {
 		@apply min-w-min;
+	}
+
+	aside {
+		height: 100%;
+		height: -moz-available;
+		height: -webkit-fill-available;
+		height: stretch;
 	}
 
 	summary {
@@ -100,12 +109,11 @@
 		@apply m-0;
 	}
 
-	aside {
-		height: 100%;
-		height: -moz-available;
-		height: -webkit-fill-available;
-		height: stretch;
-	}
+	/* .menu > li:first-of-type > ul:before {
+		animation-name: sidemenu-border-gradien;
+		animation-duration: 1ms;
+		animation-timeline: sidemenu-timeline;
+	} */
 }
 
 @layer components {

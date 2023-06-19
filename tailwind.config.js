@@ -68,6 +68,14 @@ module.exports = {
 						opacity: 0.5,
 					},
 				},
+				"sidemenu-border-gradient": {
+					from: {
+						"background-color": "red",
+					},
+					to: {
+						"background-color": "blue",
+					},
+				},
 			},
 		},
 	},
