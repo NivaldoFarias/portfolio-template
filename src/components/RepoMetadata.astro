@@ -88,7 +88,7 @@ function toRelativeTime(date: Date) {
       </span>
       /
       <span
-        id="created-at-hour"
+        id="created-at-month"
         style="--value:0;"
       >
       </span>
@@ -208,31 +208,29 @@ function toRelativeTime(date: Date) {
           document
             .getElementById("stargazers-counter")
             ?.style.setProperty("--value", String(stargazers));
-        }, 500);
+        }, 300);
       }
 
       if (data.createdAt) {
+        const segments = [
+          "millenium",
+          "decade",
+          "year",
+          "month",
+          "day",
+          "hour",
+          "minute",
+          "second",
+        ];
         const time = dateToTime(data.createdAt);
 
         setTimeout(() => {
-          document.getElementById("created-at-day")?.style.setProperty("--value", String(time.day));
-          document
-            .getElementById("created-at-hour")
-            ?.style.setProperty("--value", String(time.hour));
-          document
-            .getElementById("created-at-millenium")
-            ?.style.setProperty("--value", time.millenium);
-          document.getElementById("created-at-decade")?.style.setProperty("--value", time.decade);
-          document
-            .getElementById("created-at-hours")
-            ?.style.setProperty("--value", String(time.hour));
-          document
-            .getElementById("created-at-minutes")
-            ?.style.setProperty("--value", String(time.minute));
-          document
-            .getElementById("created-at-seconds")
-            ?.style.setProperty("--value", String(time.second));
-        }, 500);
+          segments.map((key) => {
+            document
+              .getElementById("created-at-" + key)
+              ?.style.setProperty("--value", String(time[key as keyof typeof time]));
+          });
+        }, 300);
       }
 
       if (data.size) {
@@ -255,13 +253,14 @@ function toRelativeTime(date: Date) {
                 .getElementById("size-segment-" + i.toString())
                 ?.style.setProperty("--value", segment);
             });
-          }, 500);
+          }, 300);
         }
       }
 
       function dateToTime(date: Date) {
         return {
           day: date.getDate(),
+          month: date.getMonth() + 1,
           hour: date.getHours(),
           minute: date.getMinutes(),
           second: date.getSeconds(),

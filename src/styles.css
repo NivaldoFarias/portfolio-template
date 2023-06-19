@@ -66,10 +66,6 @@
 		@apply relative;
 	}
 
-	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) h1 {
-		@apply max-w-[85%] overflow-ellipsis overflow-x-clip whitespace-nowrap text-4xl;
-	}
-
 	:is(.prose, .prose-sm, .prose-base, .prose-xl, .prose-lg) h5 {
 		@apply mt-3 mb-2 font-semibold text-base;
 	}
@@ -195,6 +191,6 @@
 	}
 
 	.stats > .stat {
-		@apply pl-6 pr-4;
+		@apply pl-5 pr-3 md:max-w-none max-w-[10.5rem] overflow-auto;
 	}
 }

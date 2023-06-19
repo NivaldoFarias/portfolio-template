@@ -69,7 +69,7 @@ const file = await unified()
     title={Astro.params.slug}
     headings={file.data.headings as Array<{ depth: number; value: string }>}
   />
-  <div class="relative min-w-0 lg:min-w-[35rem] flex flex-col">
+  <div class="relative min-w-0 max-w-[100vw] flex flex-col">
     <RepoMetadata />
     <div
       class="px-4 prose pt-4"
