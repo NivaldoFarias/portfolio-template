@@ -20,6 +20,8 @@ const url = `${baseUrl}users/${user}/repos?per_page=100&sort=created`;
 const data: Github.ListUserRepos | undefined = await fetch(url, { method: "GET", headers })
   .then((res) => res.json())
   .catch((error) => console.error(error))
+
+const sortedByStargazersCount = data?.sort((a, b) => b.stargazers_count - a.stargazers_count);
 ---
 
 <ul
@@ -27,8 +29,8 @@ const data: Github.ListUserRepos | undefined = await fetch(url, { method: "GET",
   class="link-card-grid"
 >
   {
-    data
-      ? data.map((repo) => {
+    sortedByStargazersCount
+      ? sortedByStargazersCount.map((repo) => {
           return ( 
             repo.fork === false && repo.private === false ? 
               <Card

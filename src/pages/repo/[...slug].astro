@@ -8,10 +8,7 @@ if (!Astro.params.slug) return Astro.redirect("/404");
 ---
 
 <Markdown title={Astro.params.slug}>
-  <Header
-    href="/"
-    label="Home"
-  />
+  <Header href="/" />
   <MarkdownWrapper />
   <Footer />
 </Markdown>
