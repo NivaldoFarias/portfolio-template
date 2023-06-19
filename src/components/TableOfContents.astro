@@ -32,15 +32,17 @@ let hasRendered = new Set<string>();
 <aside class="sticky hidden h-full p-4 lg:block w-80 top-30">
   <ul class="menu">
     <li>
-      <a class="flex items-center gap-2 py-2 font-xl">
+      <a
+        class="flex items-center gap-2 py-2 pl-0 text-lg !cursor-default hover:!decoration-transparent"
+      >
         <Icon
           aria-label={title}
           class="text-primary"
-          name="ph:scroll-fill"
-          height="22"
-          width="22"
+          name="fluent:text-align-left-24-filled"
+          height="32"
+          width="32"
         />
-        <span>Table of Contents</span>
+        <span class="font-semibold opacity-80">Table of Contents</span>
       </a>
       <ul>
         {
@@ -150,12 +152,12 @@ let hasRendered = new Set<string>();
     </li>
     <div class="divider"></div>
     <li>
-      <a class="flex items-center gap-2">
+      <a class="flex items-center gap-2 py-2 pl-0 text-lg !cursor-default">
         <Icon
           aria-label="Customize"
           name="ion:sparkles"
-          height="20"
-          width="20"
+          height="24"
+          width="24"
           class="text-secondary"
         />
         <span class="font-semibold opacity-80">Customize</span>

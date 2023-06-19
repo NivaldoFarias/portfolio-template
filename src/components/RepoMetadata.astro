@@ -52,16 +52,16 @@ function toRelativeTime(date: Date) {
 ---
 
 <repo-metadata
-  class="stats bg-neutral text-neutral-content drop-shadow-lg w-full max-w-[35rem] self-center"
-  data-stargazers={data.stargazers}
-  data-created={data.created_at}
+  class="stats bg-neutral text-neutral-content drop-shadow-lg w-full max-w-[35rem] self-center px-2 scale-95 sm:scale-100"
   data-size={data.size}
+  data-created={data.created_at}
+  data-stargazers={data.stargazers}
   data-homepage={data.homepage_url}
 >
-  <div class="stat">
+  <div class="pl-2 stat">
     <div class="font-semibold stat-title text-neutral-content/40">Github stars</div>
     <div class="flex items-center gap-2 stat-value text-primary">
-      <span class="countdown text-[1.7rem] pt-0.5">
+      <span class="countdown pt-0.5 md:pt-0 text-3xl">
         <span
           id="stargazers-counter"
           style="--value:0;"
@@ -71,62 +71,71 @@ function toRelativeTime(date: Date) {
       <Icon
         id="stargazers-btn"
         name="mdi:star-outline"
-        height="28"
-        width="28"
+        height="32"
+        width="32"
         class="cursor-pointer pointer-events-auto"
       />
     </div>
   </div>
 
-  <div class="stat">
+  <div class="stat min-w-[10rem]">
     <div class="font-semibold stat-title text-neutral-content/40">First commit</div>
-    <div class="stat-value text-secondary countdown">
-      <span
-        id="created-at-day"
-        style="--value:0;"
-      >
-      </span>
-      /
-      <span
-        id="created-at-month"
-        style="--value:0;"
-      >
-      </span>
-      /
-      <span
-        id="created-at-millenium"
-        style="--value:0;"
-      >
-      </span>
-      <span
-        id="created-at-decade"
-        style="--value:0;"
-      >
-      </span>, &nbsp;
-      <span
-        id="created-at-hours"
-        style="--value:0;"
-      >
-      </span>
-      :
-      <span
-        id="created-at-minutes"
-        style="--value:0;"
-      >
-      </span>
-      :
-      <span
-        id="created-at-seconds"
-        style="--value:0;"
-      >
-      </span>
+    <div
+      class="flex flex-col gap-1 text-lg md:text-2xl stat-value text-secondary md:flex-row md:gap-0"
+    >
+      <div class="year-segment countdown">
+        <span
+          id="created-at-day"
+          style="--value:0;"
+        >
+        </span>
+        /
+        <span
+          id="created-at-month"
+          style="--value:0;"
+        >
+        </span>
+        /
+        <span
+          id="created-at-millenium"
+          style="--value:0;"
+        >
+        </span>
+        <span
+          id="created-at-decade"
+          style="--value:0;"
+        >
+        </span>
+        , &nbsp;
+      </div>
+      <div class="hours-segment countdown">
+        <span
+          id="created-at-hours"
+          style="--value:0;"
+        >
+        </span>
+        :
+        <span
+          id="created-at-minutes"
+          style="--value:0;"
+        >
+        </span>
+        :
+        <span
+          id="created-at-seconds"
+          style="--value:0;"
+        >
+        </span>
+      </div>
     </div>
     <div class="stat-desc text-neutral-content/40">Last updated {data.updated_at}</div>
   </div>
 
-  <div class="stat">
+  <div class="pr-0 stat">
     <div class="font-semibold stat-title text-neutral-content/40">Data size</div>
-    <div class="stat-value text-accent countdown">
+    <div
+      class="text-[1.4rem] stat-value text-accent countdown sm:text-[1.7rem] self-center sm:self-auto"
+    >
       {
         data.size.match(/.{1,2}/g)?.map((_segment, i) => {
           return (
@@ -154,9 +163,11 @@ function toRelativeTime(date: Date) {
         size: this.dataset.size ? this.dataset.size : "0",
         homepage_url: this.dataset.homepage ? this.dataset.homepage : "N/A",
       };
+
       const btn = document.getElementById("stargazers-btn");
-      if (btn)
+      if (btn) {
         btn.addEventListener("click", () => {
+          const FILL_SVG = `<path fill="currentColor" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2L9.19 8.62L2 9.24l5.45 4.73L5.82 21L12 17.27Z"/>`;
           const count = 200;
           const defaults = {
             origin: { y: 0.7 },
@@ -196,10 +207,13 @@ function toRelativeTime(date: Date) {
           };
 
           confettiSpread();
+          btn.innerHTML = FILL_SVG;
+
           setTimeout(() => {
             window.open(data.homepage_url, "_blank");
-          }, 1000);
+          }, 750);
         });
+      }
 
       let stargazers = this.dataset.stargazers ? Number(this.dataset.stargazers) : 0;
 
@@ -218,11 +232,12 @@ function toRelativeTime(date: Date) {
           "year",
           "month",
           "day",
-          "hour",
-          "minute",
-          "second",
+          "hours",
+          "minutes",
+          "seconds",
         ];
         const time = dateToTime(data.createdAt);
+        console.log({ time });
 
         setTimeout(() => {
           segments.map((key) => {
@@ -261,9 +276,9 @@ function toRelativeTime(date: Date) {
         return {
           day: date.getDate(),
           month: date.getMonth() + 1,
-          hour: date.getHours(),
-          minute: date.getMinutes(),
-          second: date.getSeconds(),
+          hours: date.getHours(),
+          minutes: date.getMinutes(),
+          seconds: date.getSeconds(),
           millenium: String(date.getFullYear()).substring(0, 2),
           decade: String(date.getFullYear()).substring(2),
         };
