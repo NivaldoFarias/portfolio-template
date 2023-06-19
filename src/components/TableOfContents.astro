@@ -30,123 +30,124 @@ let hasRendered = new Set<string>();
 ---
 
 <aside class="hidden p-4 lg:block w-80 top-30 sticky h-full">
-  <div class="font-xl py-2 flex items-center gap-2">
-    <Icon
-      aria-label={title}
-      class="text-primary"
-      name="ph:scroll-fill"
-      height="22"
-      width="22"
-    />
-    <span>Table of Contents</span>
-  </div>
-
   <ul class="menu">
-    {
-      parsed.map((h) => {
-        if (h.depth === 1 || hasRendered.has(h.slug)) return null;
+    <li>
+      <a class="font-xl py-2 flex items-center gap-2">
+        <Icon
+          aria-label={title}
+          class="text-primary"
+          name="ph:scroll-fill"
+          height="22"
+          width="22"
+        />
+        <span>Table of Contents</span>
+      </a>
+      <ul>
+        {
+          parsed.map((h) => {
+            if (h.depth === 1 || hasRendered.has(h.slug)) return null;
 
-        const getChildren = (parent: typeof h) => {
-          const index = parsed.indexOf(parent);
+            const getChildren = (parent: typeof h) => {
+              const index = parsed.indexOf(parent);
 
-          const next = parsed
-            .slice(index + 1)
-            .findIndex((child) => child.depth < parent.depth || child.depth === parent.depth);
-          return next === -1 || next === index + 1 ? [] : parsed.slice(index + 1, index + 1 + next);
-        };
+              const next = parsed
+                .slice(index + 1)
+                .findIndex((child) => child.depth < parent.depth || child.depth === parent.depth);
+              return next === -1 || next === index + 1
+                ? []
+                : parsed.slice(index + 1, index + 1 + next);
+            };
 
-        const initial = getChildren(h);
-        hasRendered.add(h.slug);
+            const initial = getChildren(h);
+            hasRendered.add(h.slug);
 
-        return (
-          <li>
-            <a
-              href={`#${h.slug}`}
-              class="flex items-center gap-2 opacity-80 hover:opacity-100"
-            >
-              <span class="font-semibold ">{h.value}</span>
-              <span class="opacity-50">{initial.length}</span>
-            </a>
-            {initial.length > 0 ? (
-              <ul>
-                {initial.map((h2) => {
-                  if (hasRendered.has(h2.slug)) return null;
-                  hasRendered.add(h2.slug);
+            return (
+              <li>
+                <a
+                  href={`#${h.slug}`}
+                  class="flex items-center gap-2 opacity-80 hover:opacity-100"
+                >
+                  <span class="font-semibold ">{h.value}</span>
+                </a>
+                {initial.length > 0 ? (
+                  <ul>
+                    {initial.map((h2) => {
+                      if (hasRendered.has(h2.slug)) return null;
+                      hasRendered.add(h2.slug);
 
-                  if (getChildren(h2).length < 1) {
-                    return (
-                      <li>
-                        <a
-                          href={`#${h2.slug}`}
-                          class="max-w-fit"
-                        >
-                          {h2.value}
-                        </a>
-                      </li>
-                    );
-                  }
+                      if (getChildren(h2).length < 1) {
+                        return (
+                          <li>
+                            <a
+                              href={`#${h2.slug}`}
+                              class="max-w-fit"
+                            >
+                              {h2.value}
+                            </a>
+                          </li>
+                        );
+                      }
 
-                  return (
-                    <details open>
-                      <summary>
-                        <a href={`#${h2.slug}`}>{h2.value}</a>
-                      </summary>
-                      <ul>
-                        {getChildren(h2).map((h3) => {
-                          if (hasRendered.has(h3.slug)) return null;
-                          hasRendered.add(h3.slug);
+                      return (
+                        <details open>
+                          <summary>
+                            <a href={`#${h2.slug}`}>{h2.value}</a>
+                          </summary>
+                          <ul>
+                            {getChildren(h2).map((h3) => {
+                              if (hasRendered.has(h3.slug)) return null;
+                              hasRendered.add(h3.slug);
 
-                          if (getChildren(h3).length < 1) {
-                            return (
-                              <li>
-                                <a
-                                  href={`#${h3.slug}`}
-                                  class="max-w-fit"
-                                >
-                                  {h3.value}
-                                </a>
-                              </li>
-                            );
-                          }
+                              if (getChildren(h3).length < 1) {
+                                return (
+                                  <li>
+                                    <a
+                                      href={`#${h3.slug}`}
+                                      class="max-w-fit"
+                                    >
+                                      {h3.value}
+                                    </a>
+                                  </li>
+                                );
+                              }
 
-                          return (
-                            <details>
-                              <summary class="marker-alt">
-                                <a href={`#${h3.slug}`}>{h3.value}</a>
-                              </summary>
-                              <ul>
-                                {getChildren(h3).map((h4) => {
-                                  if (hasRendered.has(h4.slug)) return null;
-                                  hasRendered.add(h4.slug);
+                              return (
+                                <details>
+                                  <summary class="marker-alt">
+                                    <a href={`#${h3.slug}`}>{h3.value}</a>
+                                  </summary>
+                                  <ul>
+                                    {getChildren(h3).map((h4) => {
+                                      if (hasRendered.has(h4.slug)) return null;
+                                      hasRendered.add(h4.slug);
 
-                                  return (
-                                    <li>
-                                      <a
-                                        href={`#${h4.slug}`}
-                                        class="max-w-fit text-sm "
-                                      >
-                                        {h4.value}
-                                      </a>
-                                    </li>
-                                  );
-                                })}
-                              </ul>
-                            </details>
-                          );
-                        })}
-                      </ul>
-                    </details>
-                  );
-                })}
-              </ul>
-            ) : null}
-          </li>
-        );
-      })
-    }
-  </ul>
-
-  <ul class="menu">
+                                      return (
+                                        <li>
+                                          <a
+                                            href={`#${h4.slug}`}
+                                            class="max-w-fit text-sm "
+                                          >
+                                            {h4.value}
+                                          </a>
+                                        </li>
+                                      );
+                                    })}
+                                  </ul>
+                                </details>
+                              );
+                            })}
+                          </ul>
+                        </details>
+                      );
+                    })}
+                  </ul>
+                ) : null}
+              </li>
+            );
+          })
+        }
+      </ul>
+    </li>
     <div class="divider"></div>
     <li>
       <a class="flex items-center gap-2">
