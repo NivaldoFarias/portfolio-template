@@ -26,5 +26,14 @@ module.exports = {
 			},
 		},
 	],
+	overrides: [
+		{
+			files: ["*.md", "*.mdx"],
+			options: {
+				tabWidth: 3,
+				useTabs: false,
+			},
+		},
+	],
 	plugins: ["prettier-plugin-astro"],
 };
