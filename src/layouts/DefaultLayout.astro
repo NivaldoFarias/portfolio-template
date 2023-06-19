@@ -9,7 +9,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en-GB">
 	<head>
 		<script is:inline>
 			if (localStorage.getItem("theme") === null) {
@@ -40,7 +40,7 @@ const { title } = Astro.props;
 		/>
 		<title>{title}</title>
 	</head>
-	<body class="overflow-x-hidden relative min-h-screen pb-32 min-w-screen w-full">
+	<body class="relative w-full min-h-screen pb-32 overflow-x-hidden min-w-screen">
 		<slot />
 	</body>
 </html>

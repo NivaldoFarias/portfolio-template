@@ -59,8 +59,8 @@ function toRelativeTime(date: Date) {
   data-homepage={data.homepage_url}
 >
   <div class="stat">
-    <div class="stat-title text-neutral-content/40 font-semibold">Github stars</div>
-    <div class="stat-value flex gap-2 items-center text-primary">
+    <div class="font-semibold stat-title text-neutral-content/40">Github stars</div>
+    <div class="flex items-center gap-2 stat-value text-primary">
       <span class="countdown text-[1.7rem] pt-0.5">
         <span
           id="stargazers-counter"
@@ -79,7 +79,7 @@ function toRelativeTime(date: Date) {
   </div>
 
   <div class="stat">
-    <div class="stat-title text-neutral-content/40 font-semibold">First commit</div>
+    <div class="font-semibold stat-title text-neutral-content/40">First commit</div>
     <div class="stat-value text-secondary countdown">
       <span
         id="created-at-day"
@@ -125,7 +125,7 @@ function toRelativeTime(date: Date) {
   </div>
 
   <div class="stat">
-    <div class="stat-title text-neutral-content/40 font-semibold">Data size</div>
+    <div class="font-semibold stat-title text-neutral-content/40">Data size</div>
     <div class="stat-value text-accent countdown">
       {
         data.size.match(/.{1,2}/g)?.map((_segment, i) => {

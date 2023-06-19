@@ -29,10 +29,10 @@ const parsed = headings
 let hasRendered = new Set<string>();
 ---
 
-<aside class="hidden p-4 lg:block w-80 top-30 sticky h-full">
+<aside class="sticky hidden h-full p-4 lg:block w-80 top-30">
   <ul class="menu">
     <li>
-      <a class="font-xl py-2 flex items-center gap-2">
+      <a class="flex items-center gap-2 py-2 font-xl">
         <Icon
           aria-label={title}
           class="text-primary"
@@ -125,7 +125,7 @@ let hasRendered = new Set<string>();
                                         <li>
                                           <a
                                             href={`#${h4.slug}`}
-                                            class="max-w-fit text-sm "
+                                            class="text-sm max-w-fit "
                                           >
                                             {h4.value}
                                           </a>

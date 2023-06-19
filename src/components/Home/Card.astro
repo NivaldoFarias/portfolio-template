@@ -16,12 +16,12 @@ const { href, title, body, tags } = Astro.props;
 
 <li
 	title={title}
-	class="rounded-lg w-full card bg-neutral-content/5 shadow-xl"
+	class="w-full rounded-lg shadow-xl card bg-neutral-content/5"
 >
 	<div class="card-body">
 		<a
 			href={href}
-			class="w-fit hover:text-accent/95 transition-colors"
+			class="transition-colors w-fit hover:text-accent/95"
 		>
 			<h2 class="card-title">
 				{title}
@@ -35,7 +35,7 @@ const { href, title, body, tags } = Astro.props;
 		<p class="card-actions">
 			{body}
 		</p>
-		<div class="flex gap-2 flex-wrap">
+		<div class="flex flex-wrap gap-2">
 			{
 				tags.map((tag) => {
 					return tag in TAGS ? (

@@ -5,20 +5,20 @@ import { THEMES } from "src/data/themes";
 import ColorPalette from "./ColorPalette.astro";
 ---
 
-<div class="sticky top-0 z-30 mb-4 min-w-full bg-base-100 bg-opacity-70 backdrop-blur">
-  <div class="navbar px-4">
+<div class="sticky top-0 z-30 min-w-full mb-4 bg-base-100 bg-opacity-70 backdrop-blur">
+  <div class="px-4 navbar">
     <nav class="w-full h-16 pt-1 transition-all">
       <a href="/">
-        <kbd class="text-xl kbd px-3">home</kbd>
+        <kbd class="px-3 text-xl kbd">home</kbd>
       </a>
     </nav>
 
     <div
       title="Change theme"
-      class="z-30 dropdown dropdown-bottom dropdown-end pr-0 md:pr-2"
+      class="z-30 pr-0 dropdown dropdown-bottom dropdown-end md:pr-2"
     >
       <button
-        class="normal-case flex gap-2 items-center min-w-max flex-row whitespace-nowrap btn btn-ghost theme-change-menu"
+        class="flex flex-row items-center gap-2 normal-case min-w-max whitespace-nowrap btn btn-ghost theme-change-menu"
       >
         <Icon
           name="ph:swatches"
