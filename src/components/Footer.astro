@@ -10,6 +10,7 @@ import { Icon } from "astro-icon";
     <div class="lg:self-center">Nivaldo Farias, 2023.</div>
     <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
       <a
+        aria-label="Github profile link"
         href="https://github.com/NivaldoFarias"
         target="_blank"
       >
@@ -18,26 +19,28 @@ import { Icon } from "astro-icon";
           height="26"
           width="26"
         />
-        <a
-          href="https://gitlab.com/NivaldoFarias"
-          target="_blank"
-        >
-          <Icon
-            name="jam:gitlab"
-            height="28"
-            width="28"
-          />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/nivaldofarias/"
-          target="_blank"
-        >
-          <Icon
-            name="mdi:linkedin"
-            height="26"
-            width="26"
-          />
-        </a>
+      </a>
+      <a
+        aria-label="Gitlab profile link"
+        href="https://gitlab.com/NivaldoFarias"
+        target="_blank"
+      >
+        <Icon
+          name="jam:gitlab"
+          height="28"
+          width="28"
+        />
+      </a>
+      <a
+        aria-label="Linkedin profile link"
+        href="https://www.linkedin.com/in/nivaldofarias/"
+        target="_blank"
+      >
+        <Icon
+          name="mdi:linkedin"
+          height="26"
+          width="26"
+        />
       </a>
     </div>
   </footer>
