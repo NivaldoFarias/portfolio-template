@@ -9,15 +9,25 @@ export interface Props {
 }
 
 const { href } = Astro.props;
-
 ---
 
 <div class="sticky top-0 z-30 min-w-full mb-4 bg-base-100 bg-opacity-70 backdrop-blur">
   <div class="px-4 navbar">
     <nav class="w-full h-16 pt-1 transition-all">
-      <a href={href}>
-        <kbd class="px-3 text-xl kbd">home</kbd>
-      </a>
+      {
+        href !== "#" ? (
+          <a
+            href={href}
+            rel="prefetch"
+          >
+            <kbd class="px-3 text-xl kbd">home</kbd>
+          </a>
+        ) : (
+          <a href="#">
+            <kbd class="px-3 text-xl kbd">home</kbd>
+          </a>
+        )
+      }
     </nav>
 
     <div
