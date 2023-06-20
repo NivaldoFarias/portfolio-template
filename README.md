@@ -11,7 +11,7 @@ This project showcases a portfolio as a dashboard containing all public Github r
 The project's structure is malleable and can be easily adapted to your needs. To get started with your own version of this portfolio, follow these steps:
 
 1. _(optional)_ Fork this repository. You can also use the [GitHub CLI](https://cli.github.com/) to do this by running `gh repo fork nivaldofarias/portfolio-dashboard`.
-2. Clone your forked repository to your local machine and navigate to the project directory.
+2. Clone the forked repository to your local machine and navigate to the project directory.
 3. Install the project dependencies by running `npm install` or `yarn install`.
 4. Create a `.env` file and populate with the variables from the `.env.example` file.
    1. `GITHUB_API_TOKEN`: A [personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token). This is required to fetch your repositories and profile information from the Github API. Make sure to enable read access to your repositories.
