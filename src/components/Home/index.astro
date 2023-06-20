@@ -5,20 +5,35 @@ import CardGrid from "./CardGrid.astro";
 <main class="mx-auto max-w-2xl min-w-full md:min-w-[42rem] px-4 md:pr-6 md:pl-0 pt-4">
   <h1 class="m-0 text-4xl font-extrabold">
     Portfolio
-    <span class="fancy-text">dashboard</span>
+    <span class="fancy-text">template</span>
   </h1>
-  <div class="pt-4 pb-8 prose">
-    A portfolio website that stores projects in the <code>repos/</code> directory.
+  <div class="pt-4 pb-8 prose-sm prose md:prose-base">
+    A portfolio website that <strong>dynamically</strong> renders projects in the <code>
+      repos/
+    </code> subroute.
     <br />
-    Each one of my
-    <a
-      target="_blank"
-      href="https://github.com/"
-      class="font-bold underline decoration-2 decoration-accent underline-offset-2"
-    >
-      Github
-    </a>
-    repository's <code>README.md</code> will be rendered as a page.
+    The homepage is <strong>statically delivered</strong> and each subroute's page is rendered
+    <strong>server-side</strong>, delivering an <strong>almost-instant</strong>
+    page load. The website is optimized for
+    <strong>SEO</strong> and <strong>accessibility</strong> and can be easily customized by changing
+    the <strong class="fancy-text">theme</strong>
+    using the widget on the upper-right corner.
+
+    <blockquote>
+      <strong><span class="text-lg">Make it your own.</span></strong>
+      <br />
+      This project was built with a template-like structure and can be easily configured to fit your
+      needs.
+      <br />
+      To learn more, check out the
+      <a
+        target="_blank"
+        href="https://github.com/NivaldoFarias/portfolio-dashboard#readme"
+      >
+        instructions
+      </a>
+      on how to get started.
+    </blockquote>
   </div>
   <CardGrid />
 </main>
