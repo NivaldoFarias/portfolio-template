@@ -10,7 +10,15 @@ import lightningcss from "vite-plugin-lightningcss";
 
 export default defineConfig({
 	output: "server",
-	adapter: vercel({ analytics: true }),
+	adapter: vercel({
+		analytics: true,
+		includeFiles: Object.keys(
+			import.meta.glob([
+				"./node_modules/shiki/languages/*.tmLanguage.json",
+				"./node_modules/shiki/themes/*.json",
+			]),
+		),
+	}),
 	integrations: [tailwind(), mdx()],
 	experimental: {
 		assets: true,
