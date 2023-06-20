@@ -2,7 +2,7 @@
 
 ## Summary
 
-This project showcases a dashboard of my personal portfolio, built and generated using [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/). All pages inside the `/repo` subroute are rendered server-side and shipped with minimal JavaScript. Each page's content is fetched using the [Github API](https://docs.github.com/en/rest) and rendered using [Astro's built-in server-side rendering](https://docs.astro.build/en/guides/server-side-rendering/) and a [Vercel SSR adapter for Astro Apps](https://docs.astro.build/en/guides/integrations-guide/vercel/).
+This project showcases a portfolio as a dashboard containing all public Github repositories of the user _(myself, in this case)_. Built and generated using [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/). All pages inside the `/repo` subroute are rendered server-side and shipped with minimal JavaScript. Each page's content is fetched using the [Github API](https://docs.github.com/en/rest) and rendered using [Astro's built-in server-side rendering](https://docs.astro.build/en/guides/server-side-rendering/) and a [Vercel SSR adapter for Astro Apps](https://docs.astro.build/en/guides/integrations-guide/vercel/).
 
 ## Getting Started
 
