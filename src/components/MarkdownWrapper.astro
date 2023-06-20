@@ -1,4 +1,5 @@
 ---
+import type { VFile } from "vfile";
 import type { Github } from "src/types/";
 
 import TableOfContents from "./TableOfContents.astro";
@@ -33,40 +34,53 @@ const headers = {
   Accept: "application/vnd.github+json",
   "X-GitHub-Api-Version": version,
 };
-
 const url = `${baseUrl}repos/${user}/${Astro.params.slug}/readme`;
-const res = (await fetch(url, { headers })
-  .then((res) => res.json())
-  .catch((error) => console.error(error))) as Github.GetReadme | undefined;
+
+let res: Github.GetReadme | undefined;
+try {
+  res = await fetch(url, { headers })
+    .then((res) => res.json())
+    .catch((error) => console.error(error));
+} catch (error) {
+  console.error(error);
+}
 
 if (!res) return Astro.redirect("/404");
 
-const file = await unified()
-  .use(remarkParse)
-  .use(firstHeading, { heading: Astro.params.slug })
-  .use(remarkHeadings)
-  .use(sectionize)
-  .use(remarkGfm)
-  .use(remarkRehype)
-  .use(rehypeSlug)
-  .use(rehypeStringify)
-  .use(rehypeExternalLinks, {
-    rel: ["external"],
-    target: "_blank",
-  })
-  .use(rehypePrettyCode, {
-    theme: "rose-pine-moon",
-    keepBackground: true,
-  })
-  .use(rehypeAutolinkHeadings, {
-    behavior: "append",
-    properties: { ariaHidden: false, tabIndex: 0 },
-  })
-  .process(
-    res.content
-      ? decodeURIComponent(escapeChars(atob(res.content)))
-      : "No `README.md` file was found for this repository.",
-  );
+let file: VFile | undefined;
+
+try {
+  file = await unified()
+    .use(remarkParse)
+    .use(firstHeading, { heading: Astro.params.slug })
+    .use(remarkHeadings)
+    .use(sectionize)
+    .use(remarkGfm)
+    .use(remarkRehype)
+    .use(rehypeSlug)
+    .use(rehypeStringify)
+    .use(rehypeExternalLinks, {
+      rel: ["external"],
+      target: "_blank",
+    })
+    .use(rehypePrettyCode, {
+      theme: "rose-pine-moon",
+      keepBackground: true,
+    })
+    .use(rehypeAutolinkHeadings, {
+      behavior: "append",
+      properties: { ariaHidden: false, tabIndex: 0 },
+    })
+    .process(
+      res.content
+        ? decodeURIComponent(escapeChars(atob(res.content)))
+        : "No `README.md` file was found for this repository.",
+    );
+} catch (error) {
+  console.error(error);
+}
+
+if (!file) return Astro.redirect("/404");
 ---
 
 <div class="flex justify-center pr-0 md:pr-[5.3rem] relative">
