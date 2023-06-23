@@ -22,8 +22,8 @@ This project showcases a portfolio as a dashboard containing all public Github r
 
 The project's structure is malleable and can be easily adapted to your needs. To get started with your own version of this portfolio, follow these steps:
 
-1. _(optional)_ Fork this repository. You can also use the [GitHub CLI](https://cli.github.com/) to do this by running `gh repo fork nivaldofarias/portfolio-template`.
-2. Clone the forked repository to your local machine and navigate to the project directory.
+1. Create a new repository using this template by clicking on the `Use this template` button on the upper-right corner of the page or by running `gh repo create <repository-name> --template nivaldofarias/portfolio-template`.
+2. Clone the new repository to your local machine and navigate to the project's directory.
 3. Install the project dependencies by running `npm install` or `yarn install`.
 4. Create a `.env` file and populate with the variables from the `.env.example` file.
    1. `GITHUB_API_TOKEN`: A [personal access token](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token). This is required to fetch your repositories and profile information from the Github API. Make sure to enable read access to your repositories.
@@ -32,7 +32,7 @@ The project's structure is malleable and can be easily adapted to your needs. To
    4. `GITHUB_API_VERSION`: The Github API version. This is usually `2022-11-28`.
 5. Run `npm run dev` or `yarn dev` to start the development server.
 6. Open [http://localhost:3000](http://localhost:3000) with your browser.
-7. Start editing the project!
+7. Start editing the project.
 
 Since Astro apps run on top of [Vite](https://vitejs.dev/), all changes are hot reloaded and reflected in the browser immediately.
 
