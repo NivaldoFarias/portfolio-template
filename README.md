@@ -1,5 +1,17 @@
 # Portfolio Template
 
+## Testimonials
+
+> _"A blazingly-fast and easy-to-use portfolio template for developers of any level AND FOR FREE?!!?_ 😱 _" - Steve Jobs, probably_
+
+> _"I've never seen anything like this before. It's amazing!" - everyone that's ever used this template_
+
+## Template vs regular repository
+
+This repository is a template, which means that it can be used as a base for other repositories. This is useful for creating new repositories with the same files and directory structure as this one, whilst not maintaining the git history of the template repository. To create a new repository using this template, click on the `Use this template` button on the top of the page.
+
+To learn more about template repositories, check out the [GitHub documentation](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+
 ## Summary
 
 This project showcases a portfolio as a dashboard containing all public Github repositories of the user _(myself, in this case)_. Built and generated using [Astro](https://astro.build/), [Tailwind CSS](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/). All pages inside the `/repo` subroute are rendered server-side and shipped with minimal JavaScript. Each page's content is fetched using the [Github API](https://docs.github.com/en/rest) and rendered using [Astro's built-in server-side rendering](https://docs.astro.build/en/guides/server-side-rendering/) and a [Vercel SSR adapter for Astro Apps](https://docs.astro.build/en/guides/integrations-guide/vercel/).
