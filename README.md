@@ -10,7 +10,7 @@ This project showcases a portfolio as a dashboard containing all public Github r
 
 The project's structure is malleable and can be easily adapted to your needs. To get started with your own version of this portfolio, follow these steps:
 
-1. _(optional)_ Fork this repository. You can also use the [GitHub CLI](https://cli.github.com/) to do this by running `gh repo fork nivaldofarias/portfolio-dashboard`.
+1. _(optional)_ Fork this repository. You can also use the [GitHub CLI](https://cli.github.com/) to do this by running `gh repo fork nivaldofarias/portfolio-template`.
 2. Clone the forked repository to your local machine and navigate to the project directory.
 3. Install the project dependencies by running `npm install` or `yarn install`.
 4. Create a `.env` file and populate with the variables from the `.env.example` file.
@@ -30,5 +30,5 @@ This project is configured to be deployed to [Vercel](https://vercel.com/) with 
 
 1. Create an account on [Vercel](https://vercel.com/).
 2. On your [dashboard](https://vercel.com/dashboard), create a new project and link it to your forked repository.
-3. Navigate to the [settings tab](https://vercel.com/nivaldofarias/portfolio-dashboard/settings) and configure the project's environment variables by copying and pasting the variables from your `.env` file.
+3. Navigate to the [settings tab](https://vercel.com/nivaldofarias/portfolio-template/settings) and configure the project's environment variables by copying and pasting the variables from your `.env` file.
 4. Deploy.
