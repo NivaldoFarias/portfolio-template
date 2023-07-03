@@ -49,6 +49,19 @@ let hasRendered = new Set<string>();
           parsed.map((h) => {
             if (h.depth === 1 || hasRendered.has(h.slug)) return null;
 
+            const HeadingWithNoChildren = (heading: typeof h) => {
+              return (
+                <li>
+                  <a
+                    href={`#${heading.slug}`}
+                    class="max-w-fit"
+                  >
+                    {heading.value}
+                  </a>
+                </li>
+              );
+            };
+
             const getChildren = (parent: typeof h) => {
               const index = parsed.indexOf(parent);
 
@@ -60,8 +73,8 @@ let hasRendered = new Set<string>();
                 : parsed.slice(index + 1, index + 1 + next);
             };
 
-            const initial = getChildren(h);
             hasRendered.add(h.slug);
+            const children = getChildren(h);
 
             return (
               <li>
@@ -71,24 +84,14 @@ let hasRendered = new Set<string>();
                 >
                   <span class="font-semibold ">{h.value}</span>
                 </a>
-                {initial.length > 0 ? (
+                {children.length > 0 ? (
                   <ul>
-                    {initial.map((h2) => {
+                    {children.map((h2) => {
                       if (hasRendered.has(h2.slug)) return null;
-                      hasRendered.add(h2.slug);
 
-                      if (getChildren(h2).length < 1) {
-                        return (
-                          <li>
-                            <a
-                              href={`#${h2.slug}`}
-                              class="max-w-fit"
-                            >
-                              {h2.value}
-                            </a>
-                          </li>
-                        );
-                      }
+                      hasRendered.add(h2.slug);
+                      const children = getChildren(h2);
+                      if (children.length === 0) return HeadingWithNoChildren(h2);
 
                       return (
                         <details open>
@@ -96,22 +99,12 @@ let hasRendered = new Set<string>();
                             <a href={`#${h2.slug}`}>{h2.value}</a>
                           </summary>
                           <ul>
-                            {getChildren(h2).map((h3) => {
+                            {children.map((h3) => {
                               if (hasRendered.has(h3.slug)) return null;
-                              hasRendered.add(h3.slug);
 
-                              if (getChildren(h3).length < 1) {
-                                return (
-                                  <li>
-                                    <a
-                                      href={`#${h3.slug}`}
-                                      class="max-w-fit"
-                                    >
-                                      {h3.value}
-                                    </a>
-                                  </li>
-                                );
-                              }
+                              hasRendered.add(h3.slug);
+                              const children = getChildren(h3);
+                              if (children.length === 0) return HeadingWithNoChildren(h3);
 
                               return (
                                 <details>
@@ -119,20 +112,11 @@ let hasRendered = new Set<string>();
                                     <a href={`#${h3.slug}`}>{h3.value}</a>
                                   </summary>
                                   <ul>
-                                    {getChildren(h3).map((h4) => {
+                                    {children.map((h4) => {
                                       if (hasRendered.has(h4.slug)) return null;
-                                      hasRendered.add(h4.slug);
 
-                                      return (
-                                        <li>
-                                          <a
-                                            href={`#${h4.slug}`}
-                                            class="text-sm max-w-fit "
-                                          >
-                                            {h4.value}
-                                          </a>
-                                        </li>
-                                      );
+                                      hasRendered.add(h4.slug);
+                                      return HeadingWithNoChildren(h4);
                                     })}
                                   </ul>
                                 </details>

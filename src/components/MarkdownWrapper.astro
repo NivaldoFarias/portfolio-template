@@ -14,6 +14,7 @@ import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import remarkHeadings from "@vcarl/remark-headings";
 import firstHeading from "remark-first-heading";
+import rehypeRaw from "rehype-raw";
 
 import rehypeSlug from "rehype-slug";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -56,7 +57,8 @@ try {
     .use(remarkHeadings)
     .use(sectionize)
     .use(remarkGfm)
-    .use(remarkRehype)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
     .use(rehypeSlug)
     .use(rehypeStringify)
     .use(rehypeExternalLinks, {
