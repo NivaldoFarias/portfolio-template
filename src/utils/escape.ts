@@ -3,10 +3,10 @@
  *
  * @see [`escape` global function **(deprecated)**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/escape)
  */
-export default function escapeChars(string: any) {
+export function escapeChars(input: any) {
 	const RAW = /[\w*+\-./@]/;
 
-	let str = String(string);
+	let str = String(input);
 	let result = "";
 	let length = str.length;
 	let index = 0;

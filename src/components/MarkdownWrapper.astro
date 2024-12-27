@@ -1,11 +1,11 @@
 ---
 import type { VFile } from "vfile";
-import type { Github } from "src/types/";
+import type { Github } from "../../types/github";
 
 import TableOfContents from "./TableOfContents.astro";
 import RepoMetadata from "./RepoMetadata.astro";
 
-import escapeChars from "src/utils/escape";
+import { escapeChars } from "../utils/escape";
 
 import { unified } from "unified";
 import remarkParse from "remark-parse";
@@ -24,18 +24,14 @@ import rehypeExternalLinks from "rehype-external-links";
 
 if (!Astro.params.slug) return Astro.redirect("/404");
 
-const {
-	GITHUB_API_TOKEN: token,
-	GITHUB_API_URL: baseUrl,
-	GITHUB_API_OWNER: user,
-	GITHUB_API_VERSION: version,
-} = import.meta.env;
+import { env } from "../env";
+
 const headers = {
-	"Authorization": `Bearer ${token}`,
+	"Authorization": `Bearer ${env.GITHUB_API_TOKEN}`,
 	"Accept": "application/vnd.github+json",
-	"X-GitHub-Api-Version": version,
+	"X-GitHub-Api-Version": env.GITHUB_API_VERSION,
 };
-const url = `${baseUrl}repos/${user}/${Astro.params.slug}/readme`;
+const url = `${env.GITHUB_API_URL}repos/${env.GITHUB_API_OWNER}/${Astro.params.slug}/readme`;
 
 let res: Github.GetReadme | undefined;
 try {

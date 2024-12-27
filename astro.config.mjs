@@ -1,9 +1,10 @@
 import { defineConfig } from "astro/config";
+import icon from "astro-icon";
 
 // Astro Plugins
 import mdx from "@astrojs/mdx";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel";
 
 // Vite Plugins
 import lightningcss from "vite-plugin-lightningcss";
@@ -18,7 +19,7 @@ export default defineConfig({
 			"./node_modules/shiki/themes/*.json",
 		].map((path) => new URL(path, import.meta.url).pathname),
 	}),
-	integrations: [tailwind(), mdx(), prefetch()],
+	integrations: [icon(), tailwind(), mdx(), prefetch()],
 	vite: {
 		plugins: [
 			lightningcss({
