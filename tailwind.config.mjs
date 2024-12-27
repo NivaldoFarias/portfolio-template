@@ -1,48 +1,54 @@
+import tailwindTypography from "@tailwindcss/typography";
+import daisyui from "daisyui";
+
+/** @type {import("daisyui").Config} */
+const daisyuiConfig = {
+	themes: [
+		"light",
+		"dark",
+		"cupcake",
+		"bumblebee",
+		"emerald",
+		"corporate",
+		"synthwave",
+		"retro",
+		"cyberpunk",
+		"valentine",
+		"halloween",
+		"garden",
+		"forest",
+		"aqua",
+		"lofi",
+		"pastel",
+		"fantasy",
+		"wireframe",
+		"black",
+		"luxury",
+		"dracula",
+		"cmyk",
+		"autumn",
+		"business",
+		"acid",
+		"lemonade",
+		"night",
+		"coffee",
+		"winter",
+	],
+};
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,ts,tsx}"],
-	plugins: [require("daisyui"), require("@tailwindcss/typography")],
-	daisyui: {
-		themes: [
-			"light",
-			"dark",
-			"cupcake",
-			"bumblebee",
-			"emerald",
-			"corporate",
-			"synthwave",
-			"retro",
-			"cyberpunk",
-			"valentine",
-			"halloween",
-			"garden",
-			"forest",
-			"aqua",
-			"lofi",
-			"pastel",
-			"fantasy",
-			"wireframe",
-			"black",
-			"luxury",
-			"dracula",
-			"cmyk",
-			"autumn",
-			"business",
-			"acid",
-			"lemonade",
-			"night",
-			"coffee",
-			"winter",
-		],
-	},
+	plugins: [daisyui, tailwindTypography],
+	daisyui: daisyuiConfig,
 	theme: {
 		extend: {
 			animation: {
-				text: "text 5s ease infinite",
+				"text": "text 5s ease infinite",
 				"link-icon": "link-icon 500ms ease-in",
 			},
 			keyframes: {
-				text: {
+				"text": {
 					"0%, 100%": {
 						"background-size": "200% 200%",
 						"background-position": "left center",
@@ -52,20 +58,20 @@ module.exports = {
 						"background-position": "right center",
 					},
 				},
-				shimmer: {
+				"shimmer": {
 					"100%": {
 						transform: "translateX(100%)",
 					},
 				},
 				"link-icon": {
 					"0%": {
-						opacity: 0,
+						opacity: "0",
 					},
 					"50%": {
-						opacity: 0.25,
+						opacity: "0.25",
 					},
 					"100%": {
-						opacity: 0.5,
+						opacity: "0.5",
 					},
 				},
 				"sidemenu-border-gradient": {

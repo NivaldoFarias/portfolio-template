@@ -1,79 +1,77 @@
 ---
-import type { Github } from "src/types/";
+import type { Github } from "./../../../types/github";
 
 import Card from "./Card.astro";
+import { env } from "../../env";
 
-const {
-  GITHUB_API_TOKEN: token,
-  GITHUB_API_URL: baseUrl,
-  GITHUB_API_OWNER: user,
-  GITHUB_API_VERSION: version,
-} = import.meta.env;
 const headers = {
-  Authorization: `Bearer ${token}`,
-  Accept: "application/vnd.github+json",
-  "X-GitHub-Api-Version": version,
+	"Authorization": `Bearer ${env.GITHUB_API_TOKEN}`,
+	"Accept": "application/vnd.github+json",
+	"X-GitHub-Api-Version": env.GITHUB_API_VERSION,
 };
 
-
-const url = `${baseUrl}users/${user}/repos?per_page=100&sort=created`;
+const url = `${env.GITHUB_API_URL}users/${env.GITHUB_API_OWNER}/repos?per_page=100&sort=created`;
 let data: Github.ListUserRepos | undefined;
 
 try {
-  data = await fetch(url, { method: "GET", headers })
-   .then((res) => res.json())
-   .catch((error) => console.error(error))
+	data = await fetch(url, { method: "GET", headers })
+		.then((res) => res.json())
+		.catch((error) => console.error(error));
 } catch (error) {
-  console.error(error);
+	console.error(error);
 }
 
 const repoPriority = "portfolio-template";
-const sortedByStargazersCount = data?.sort((a, b) => b.name === repoPriority ? 1 : b.stargazers_count - a.stargazers_count);
+const sortedByStargazersCount = data?.sort((a, b) =>
+	b.name === repoPriority ? 1 : b.stargazers_count - a.stargazers_count,
+);
 ---
 
 <ul
-  role="list"
-  class="grid grid-cols-1 sm:grid-cols-2 p-0 min-h-[8rem] min-w-[16rem] link-card-grid gap-x-3 gap-y-8"
+	role="list"
+	class="grid grid-cols-1 sm:grid-cols-2 p-0 min-h-[8rem] min-w-[16rem] link-card-grid gap-x-3 gap-y-8"
 >
-  {
-    sortedByStargazersCount
-      ? sortedByStargazersCount.map((repo) => {
-          return ( 
-            repo.fork === false && repo.private === false ? 
-              <Card
-                href={`/repo/${repo.name}?stargazers=${repo.stargazers_count}&created_at=${repo.created_at}&updated_at=${repo.updated_at}&language=${repo.language}&topics=${repo.topics}&size=${repo.size}&homepage=${repo.html_url}`}
-                title={repo.name}
-                body={repo.description || ""}
-                tags={repo.topics && repo.topics.length ? repo.topics : [repo.language?.toLowerCase() || ""]}
-              /> 
-              : null
-          );
-        })
-      : (
-        <Card
-          href="https://github.com/NivaldoFarias"
-          title="Github Profile"
-          body="Explore the projects I've previously worked on."
-          tags={['github']}
-        />
-        <Card
-          href="https://astro.build/"
-          title="Astro"
-          body="This project was built with Astro. Explore their documentation."
-          tags={['astro']}
-        />
-        <Card
-          href="https://daisyui.com/"
-          title="Themes"
-          body="Themes and color palettes powered by DaisyUI."
-          tags={['tailwindcss', 'daisyui']}
-        />
-        <Card
-          href="https://tailwindcss.com/"
-          title="Tailwind CSS"
-          body="All Styles and Layout are powered by Tailwind CSS."
-          tags={['tailwindcss']}
-        />
-      )
-  }
+	{
+		sortedByStargazersCount ? (
+			sortedByStargazersCount.map((repo) => {
+				return repo.fork === false && repo.private === false ? (
+					<Card
+						href={`/repo/${repo.name}?stargazers=${repo.stargazers_count}&created_at=${repo.created_at}&updated_at=${repo.updated_at}&language=${repo.language}&topics=${repo.topics}&size=${repo.size}&homepage=${repo.html_url}`}
+						title={repo.name}
+						body={repo.description || ""}
+						tags={
+							repo.topics && repo.topics.length ? repo.topics : [repo.language?.toLowerCase() || ""]
+						}
+					/>
+				) : null;
+			})
+		) : (
+			<>
+				<Card
+					href="https://github.com/NivaldoFarias"
+					title="Github Profile"
+					body="Explore the projects I've previously worked on."
+					tags={["github"]}
+				/>
+				<Card
+					href="https://astro.build/"
+					title="Astro"
+					body="This project was built with Astro. Explore their documentation."
+					tags={["astro"]}
+				/>
+				<Card
+					href="https://daisyui.com/"
+					title="Themes"
+					body="Themes and color palettes powered by DaisyUI."
+					tags={["tailwindcss", "daisyui"]}
+				/>
+				<Card
+					href="https://tailwindcss.com/"
+					title="Tailwind CSS"
+					body="All Styles and Layout are powered by Tailwind CSS."
+					tags={["tailwindcss"]}
+				/>
+			</>
+		)
+	}
 </ul>

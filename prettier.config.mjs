@@ -31,6 +31,12 @@ export default {
 				useTabs: false,
 			},
 		},
+		{
+			files: "*.astro",
+			options: {
+				parser: "astro",
+			},
+		},
 	],
 	plugins: ["prettier-plugin-astro"],
 };

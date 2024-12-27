@@ -5,62 +5,62 @@ import { THEMES } from "src/data/themes";
 import ColorPalette from "./ColorPalette.astro";
 
 export interface Props {
-  href: string;
+	href: string;
 }
 
 const { href } = Astro.props;
 ---
 
 <div class="sticky top-0 z-30 min-w-full mb-4 bg-base-100 bg-opacity-60 backdrop-blur">
-  <div class="px-4 navbar">
-    <nav class="w-full h-16 pt-1 transition-all">
-      {
-        href !== "#" ? (
-          <a
-            href={href}
-            rel="prefetch"
-          >
-            <kbd class="px-3 text-xl kbd">home</kbd>
-          </a>
-        ) : (
-          <a href="#">
-            <kbd class="px-3 text-xl kbd">home</kbd>
-          </a>
-        )
-      }
-    </nav>
+	<div class="px-4 navbar">
+		<nav class="w-full h-16 pt-1 transition-all">
+			{
+				href !== "#" ? (
+					<a
+						href={href}
+						rel="prefetch"
+					>
+						<kbd class="px-3 text-xl kbd">home</kbd>
+					</a>
+				) : (
+					<a href="#">
+						<kbd class="px-3 text-xl kbd">home</kbd>
+					</a>
+				)
+			}
+		</nav>
 
-    <div
-      title="Change theme"
-      class="z-30 pr-0 dropdown dropdown-bottom dropdown-end md:pr-2"
-    >
-      <button
-        class="flex flex-row items-center gap-2 normal-case min-w-max whitespace-nowrap btn btn-ghost theme-change-menu"
-      >
-        <Icon
-          name="ph:swatches"
-          height="28"
-          width="28"
-        />
-        <span class="text-lg fancy-text">Theme</span>
-      </button>
-      <div
-        class="dropdown-content text-base-content menu shadow bg-base-200 rounded-box w-56 overflow-y-auto top-px h-[70vh] max-h-96 mt-8"
-      >
-        <div class="flex flex-col gap-3 p-2">
-          {
-            THEMES.map(({ theme, label }) => {
-              return (
-                <ColorPalette
-                  theme={theme}
-                  label={label}
-                />
-              );
-            })
-          }
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="m-0 divider h-[1px]"></div>
+		<div
+			title="Change theme"
+			class="z-30 pr-0 dropdown dropdown-bottom dropdown-end md:pr-2"
+		>
+			<button
+				class="flex flex-row items-center gap-2 normal-case min-w-max whitespace-nowrap btn btn-ghost theme-change-menu"
+			>
+				<Icon
+					name="ph:swatches"
+					height="28"
+					width="28"
+				/>
+				<span class="text-lg fancy-text">Theme</span>
+			</button>
+			<div
+				class="dropdown-content text-base-content menu shadow bg-base-200 rounded-box w-56 overflow-y-auto top-px h-[70vh] max-h-96 mt-8"
+			>
+				<div class="flex flex-col gap-3 p-2">
+					{
+						THEMES.map(({ theme, label }) => {
+							return (
+								<ColorPalette
+									theme={theme}
+									label={label}
+								/>
+							);
+						})
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="m-0 divider h-[1px]"></div>
 </div>

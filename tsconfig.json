@@ -1,9 +1,7 @@
 {
+    "extends": "astro/tsconfigs/base",
     "compilerOptions": {
         /* Language Compilation Options */
-        "module": "ESNext",
-        "target": "ESNext",
-        "moduleResolution": "node",
         "resolveJsonModule": true,
         "allowJs": true,
         "checkJs": true,
@@ -16,10 +14,18 @@
         "noPropertyAccessFromIndexSignature": true,
 
         /* Other Options */
-        "skipLibCheck": true,
+        "skipLibCheck": false,
         "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true
+        "verbatimModuleSyntax": true,
+        "forceConsistentCasingInFileNames": true,
+
+        "plugins": [{ "name": "@astrojs/ts-plugin" }],
+        "typeRoots": ["types"],
+        "baseUrl": ".",
+        "paths": {
+            "~/*": ["./*"]
+        }
     },
-    "include": ["**/*.js", "**/*.ts", ".*.cjs"],
-    "exclude": ["node_modules", ".astro/"]
+    "include": ["**/*.js", "**/*.ts", ".*.cjs", "*.mjs", ".astro/types.d.ts"],
+    "exclude": ["node_modules", ".astro/", "dist"]
 }
