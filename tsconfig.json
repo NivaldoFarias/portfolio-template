@@ -1,24 +1,25 @@
 {
-	"extends": "astro/tsconfigs/strictest",
-	"compilerOptions": {
-		// Modules
-		"baseUrl": "./",
-		"module": "nodenext",
+    "compilerOptions": {
+        /* Language Compilation Options */
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "checkJs": true,
 
-		// Type Checking
-		"strict": true,
+        /* Emit Rules */
+        "noEmit": true,
 
-		// Language and Environment
-		"target": "esnext",
-		"verbatimModuleSyntax": true,
+        /* Type Checking Rules */
+        "strict": true,
+        "noPropertyAccessFromIndexSignature": true,
 
-		// Interop Constraints
-		"forceConsistentCasingInFileNames": true,
-		"plugins": [
-			{
-				"name": "@astrojs/ts-plugin"
-			}
-		]
-	},
-	"exclude": ["node_modules", ".astro/"]
+        /* Other Options */
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": ["**/*.js", "**/*.ts", ".*.cjs"],
+    "exclude": ["node_modules", ".astro/"]
 }
