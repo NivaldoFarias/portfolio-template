@@ -19,7 +19,7 @@ if (!listUserRepos.ok) {
 
 const data: Github.ListUserRepos[] | undefined = await listUserRepos.json();
 
-const repoPriority = "portfolio-template";
+const repoPriority = "portfolio";
 const sortedByStargazersCount = data?.sort((a, b) =>
 	b.name === repoPriority ? 1 : b.stargazers_count - a.stargazers_count,
 );
@@ -34,9 +34,9 @@ const sortedByStargazersCount = data?.sort((a, b) =>
 			sortedByStargazersCount.map((repo) => {
 				return repo.fork === false && repo.private === false ? (
 					<Card
-						href={`/repo/${repo.name}?stargazers=${repo.stargazers_count}&created_at=${repo.created_at}&updated_at=${repo.updated_at}&language=${repo.language}&topics=${repo.topics}&size=${repo.size}&homepage=${repo.html_url}`}
+						href={repo.html_url}
 						title={repo.name}
-						body={repo.description || ""}
+						body={repo.description ?? ""}
 						tags={
 							repo.topics && repo.topics.length ? repo.topics : [repo.language?.toLowerCase() || ""]
 						}

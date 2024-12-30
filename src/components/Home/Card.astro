@@ -20,14 +20,15 @@ const { href, title, body, tags } = Astro.props;
 >
 	<div class="card-body">
 		<a
-			rel="prefetch"
+			target="_blank"
+			rel="external"
 			href={href}
 			class="transition-colors w-fit hover:text-accent/95"
 		>
 			<h2 class="card-title">
 				{title}
 				<Icon
-					name="ic:baseline-arrow-right-alt"
+					name="mdi:arrow-right-thin"
 					height="22"
 					width="22"
 				/>

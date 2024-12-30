@@ -178,7 +178,7 @@
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	.theme-change-menu:is(:focus, :focus-within, :focus-visible, )::after,
+	.theme-change-menu:is(:focus, :focus-within, :focus-visible)::after,
 	.dropdown-content:is(
 			:focus,
 			:focus-within,
