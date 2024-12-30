@@ -32,10 +32,11 @@ const sortedByStargazersCount = data?.sort((a, b) =>
 	{
 		sortedByStargazersCount ? (
 			sortedByStargazersCount.map((repo) => {
-				return repo.fork === false && repo.private === false ? (
+				return !repo.fork && !repo.private ? (
 					<Card
 						href={repo.html_url}
 						title={repo.name}
+						stargazers={repo.stargazers_count}
 						body={repo.description ?? ""}
 						tags={
 							repo.topics && repo.topics.length ? repo.topics : [repo.language?.toLowerCase() || ""]

@@ -8,10 +8,11 @@ export interface Props {
 	title: string;
 	body: string;
 	href: string;
+	stargazers?: number;
 	tags: string[];
 }
 
-const { href, title, body, tags } = Astro.props;
+const { href, title, body, tags, stargazers } = Astro.props;
 ---
 
 <li
@@ -48,5 +49,17 @@ const { href, title, body, tags } = Astro.props;
 				})
 			}
 		</div>
+		{
+			typeof stargazers === "number" ? (
+				<div class="shadow-inner flex justify-between items-center p-2 rounded-lg mt-4">
+					<Icon
+						name="mdi:star"
+						height="26"
+						width="26"
+					/>
+					<div class="stat-value">{stargazers}</div>
+				</div>
+			) : null
+		}
 	</div>
 </li>
