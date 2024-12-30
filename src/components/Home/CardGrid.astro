@@ -11,15 +11,13 @@ const headers = {
 };
 
 const url = `${env.GITHUB_API_URL}users/${env.GITHUB_API_OWNER}/repos?per_page=100&sort=created`;
-let data: Github.ListUserRepos | undefined;
+const listUserRepos = await fetch(url, { method: "GET", headers });
 
-try {
-	data = await fetch(url, { method: "GET", headers })
-		.then((res) => res.json())
-		.catch((error) => console.error(error));
-} catch (error) {
-	console.error(error);
+if (!listUserRepos.ok) {
+	throw new Error(`[${listUserRepos.status}] ${listUserRepos.statusText}`);
 }
+
+const data: Github.ListUserRepos | undefined = await listUserRepos.json();
 
 const repoPriority = "portfolio-template";
 const sortedByStargazersCount = data?.sort((a, b) =>
