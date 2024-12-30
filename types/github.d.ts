@@ -518,7 +518,7 @@ export declare namespace Github {
         };
     }
 
-    export type ListUserRepos = Array<{
+    export type ListUserRepos = {
         id: number;
         node_id: string;
         name: string;
@@ -635,5 +635,5 @@ export declare namespace Github {
         forks: number;
         open_issues: number;
         watchers: number;
-    }>;
+    };
 }

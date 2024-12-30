@@ -17,7 +17,7 @@ if (!listUserRepos.ok) {
 	throw new Error(`[${listUserRepos.status}] ${listUserRepos.statusText}`);
 }
 
-const data: Github.ListUserRepos | undefined = await listUserRepos.json();
+const data: Github.ListUserRepos[] | undefined = await listUserRepos.json();
 
 const repoPriority = "portfolio-template";
 const sortedByStargazersCount = data?.sort((a, b) =>
