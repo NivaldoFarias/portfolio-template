@@ -38,13 +38,33 @@ const defaultCards: Partial<RepositoryData>[] = [
 ];
 ---
 
-<ul
-	role="list"
-	class="grid grid-cols-1 sm:grid-cols-2 p-0 min-h-[8rem] min-w-[16rem] link-card-grid gap-x-3 gap-y-8"
->
-	{
-		listUserRepos?.length
-			? listUserRepos.map((repo) => (!repo.fork && !repo.private ? <Card data={repo} /> : null))
-			: defaultCards.map((data) => <Card data={data} />)
-	}
-</ul>
+<>
+	<div class="join flex justify-between">
+		<div class="label join-item">
+			<span class="label-text text-2xl">Sort repositories by</span>
+		</div>
+		<select class="select select-ghost select-lg join-item">
+			<option
+				disabled
+				selected
+			>
+				Last update
+			</option>
+			<option>Star Wars</option>
+			<option>Harry Potter</option>
+			<option>Lord of the Rings</option>
+			<option>Planet of the Apes</option>
+			<option>Star Trek</option>
+		</select>
+	</div>
+	<ul
+		role="list"
+		class="grid grid-cols-1 sm:grid-cols-2 p-0 min-h-[8rem] min-w-[16rem] link-card-grid gap-x-3 gap-y-8 mt-4"
+	>
+		{
+			listUserRepos?.length
+				? listUserRepos.map((repo) => (!repo.fork && !repo.private ? <Card data={repo} /> : null))
+				: defaultCards.map((data) => <Card data={data} />)
+		}
+	</ul>
+</>
