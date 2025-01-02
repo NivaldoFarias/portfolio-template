@@ -4,12 +4,12 @@ import { api } from "../../utils/github-api";
 
 const listUserRepos = await api.listUserRepos({ per_page: 100, sort: "created" });
 
-const data = listUserRepos?.data;
-
 const repoPriority = "portfolio";
-const sortedByStargazersCount = data?.sort((a, b) =>
-	b.name === repoPriority ? 1 : b.stargazers_count - a.stargazers_count,
-);
+const sortedByStargazersCount = Array.isArray(listUserRepos?.data)
+	? listUserRepos?.data?.sort((a, b) =>
+			b.name === repoPriority ? 1 : b.stargazers_count - a.stargazers_count,
+		)
+	: [];
 ---
 
 <ul

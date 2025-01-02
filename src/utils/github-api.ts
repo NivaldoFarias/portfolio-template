@@ -4,15 +4,14 @@ import { env } from "../env";
 export const api = {
 	listUserRepos: (queryParams?: Record<string, any>) => {
 		const params = new URLSearchParams(queryParams).toString();
+		const url = `${env.GITHUB_API_URL}users/${env.GITHUB_API_OWNER}/repos?${params}`;
 
-		return githubApi<Endpoints["GET /repos/{owner}/{repo}"]["response"]>(
-			`${env.GITHUB_API_URL}users/${env.GITHUB_API_OWNER}/repos?${params}`,
-		);
+		return githubApi<Endpoints["GET /repos/{owner}/{repo}"]["response"]>(url);
 	},
 	repoReadme: (repo: string) => {
-		return githubApi<Endpoints["GET /repos/{owner}/{repo}/readme"]["response"]>(
-			`${env.GITHUB_API_URL}repos/${env.GITHUB_API_OWNER}/${repo}/readme`,
-		);
+		const url = `${env.GITHUB_API_URL}repos/${env.GITHUB_API_OWNER}/${repo}/readme`;
+
+		return githubApi<Endpoints["GET /repos/{owner}/{repo}/readme"]["response"]>(url);
 	},
 };
 
