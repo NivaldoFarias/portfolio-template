@@ -2,14 +2,12 @@
 import CardGrid from "./CardGrid.astro";
 ---
 
-<main class="mx-auto max-w-2xl min-w-full md:min-w-[42rem] px-4 md:pr-6 md:pl-0 pt-4">
+<main class="mx-auto max-w-5xl min-w-full md:min-w-[42rem] px-4 md:pr-6 md:pl-0 pt-4">
 	<h1 class="m-0 text-6xl font-extrabold">
 		<span class="fancy-text">Portfolio</span>
 	</h1>
-	<div class="pt-4 pb-8 prose-sm prose md:prose-base">
-		A portfolio website that <strong>dynamically</strong> renders projects in the <code>
-			repos/
-		</code> subroute.
+	<div class="pt-4 pb-8 prose-sm prose md:prose-base min-w-full">
+		This portfolio website <strong>dynamically</strong> renders projects in the <code>repos/</code> subroute.
 		<br />
 		The homepage is <strong>statically delivered</strong> and each subroute's page is rendered
 		<strong>server-side</strong>, delivering an <strong>almost-instant</strong>

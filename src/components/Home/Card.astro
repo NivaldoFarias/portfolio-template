@@ -1,33 +1,31 @@
 ---
+import type { RepositoryData } from "../../utils/github-api";
+
 import { Icon } from "astro-icon/components";
 
 import { TAGS } from "../../data/tags";
 import Badge from "./Badge.astro";
 
 export interface Props {
-	title: string;
-	body: string;
-	href: string;
-	stargazers?: number;
-	tags: string[];
+	data: Partial<RepositoryData>;
 }
 
-const { href, title, body, tags, stargazers } = Astro.props;
+const { data } = Astro.props;
 ---
 
 <li
-	title={title}
+	title={data.name}
 	class="w-full rounded-lg shadow-xl shadow-custom card bg-neutral-content/5"
 >
-	<div class="card-body">
+	<div class="card-body flex gap-4">
 		<a
 			target="_blank"
 			rel="external"
-			href={href}
+			href={data.html_url}
 			class="transition-colors w-fit hover:text-accent/95"
 		>
 			<h2 class="card-title">
-				{title}
+				{data.name}
 				<Icon
 					name="mdi:arrow-right-thin"
 					height="22"
@@ -36,11 +34,11 @@ const { href, title, body, tags, stargazers } = Astro.props;
 			</h2>
 		</a>
 		<p class="card-actions">
-			{body}
+			{data.description}
 		</p>
-		<div class="flex flex-wrap gap-2">
+		<div class="flex flex-wrap gap-2 mt-1">
 			{
-				tags.map((tag) => {
+				data.topics?.map((tag) => {
 					return tag in TAGS ? (
 						<Badge tag={TAGS[tag as keyof typeof TAGS]} />
 					) : (
@@ -49,7 +47,58 @@ const { href, title, body, tags, stargazers } = Astro.props;
 				})
 			}
 		</div>
-		{
+
+		<!-- metadata -->
+		<div class="stats">
+			<div class="stat">
+				<div class="stat-figure text-primary">
+					<Icon
+						name="mdi:star"
+						height="28"
+						width="28"
+					/>
+				</div>
+				<div class="stat-title">Stargazers</div>
+				<div class="stat-value text-primary">{data.stargazers_count}</div>
+				<div class="stat-desc"></div>
+			</div>
+
+			<div class="stat">
+				<div class="stat-figure text-secondary">
+					<Icon
+						name="mdi:lightning-bolt-outline"
+						height="28"
+						width="28"
+					/>
+				</div>
+				<div class="stat-title">Page Views</div>
+				<div class="stat-value text-secondary">{data.network_count}</div>
+				<div class="stat-desc"></div>
+			</div>
+
+			<div class="stat">
+				<div class="stat-figure text-secondary">
+					<Icon
+						name="mdi:source-fork"
+						height="28"
+						width="28"
+					/>
+				</div>
+				<div class="stat-title">Forks</div>
+				<div class="stat-value">{data.forks_count}</div>
+				<div class="stat-desc"></div>
+			</div>
+		</div>
+		<!-- <div
+			tabindex="0"
+			class="collapse border-base-300 bg-base-200 border"
+		>
+			<input type="checkbox" />
+			<div class="collapse-title text-xl font-medium">Statistics</div>
+			<div class="collapse-content">
+			</div>
+		</div> -->
+		<!-- {
 			typeof stargazers === "number" ? (
 				<div class="shadow-inner flex justify-between items-center p-2 rounded-lg mt-4">
 					<Icon
@@ -60,6 +109,6 @@ const { href, title, body, tags, stargazers } = Astro.props;
 					<div class="stat-value">{stargazers}</div>
 				</div>
 			) : null
-		}
+		} -->
 	</div>
 </li>

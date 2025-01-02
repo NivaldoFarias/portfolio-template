@@ -1,15 +1,46 @@
 ---
+import type { RepositoryData } from "../../utils/github-api";
+
 import Card from "./Card.astro";
 import { api } from "../../utils/github-api";
 
-const listUserRepos = await api.listUserRepos({ per_page: 100, sort: "created" });
+const listUserRepos = await api.listUserRepos({
+	per_page: 100,
+	sort: "updated",
+	direction: "desc",
+});
 
 const repoPriority = "portfolio";
-const sortedByStargazersCount = Array.isArray(listUserRepos?.data)
-	? listUserRepos?.data?.sort((a, b) =>
-			b.name === repoPriority ? 1 : b.stargazers_count - a.stargazers_count,
-		)
-	: [];
+const sortedByStargazersCount = listUserRepos?.sort((a, b) =>
+	b.name === repoPriority ? 1 : b.stargazers_count - a.stargazers_count,
+);
+
+const defaultCards: Partial<RepositoryData>[] = [
+	{
+		html_url: "https://github.com/NivaldoFarias",
+		name: "Github Profile",
+		description: "Explore the projects I've previously worked on.",
+		topics: ["github"],
+	},
+	{
+		html_url: "https://astro.build/",
+		name: "Astro",
+		description: "This project was built with Astro. Explore their documentation.",
+		topics: ["astro"],
+	},
+	{
+		html_url: "https://daisyui.com/",
+		name: "Themes",
+		description: "Themes and color palettes powered by DaisyUI.",
+		topics: ["tailwindcss", "daisyui"],
+	},
+	{
+		html_url: "https://tailwindcss.com/",
+		name: "Tailwind CSS",
+		description: "All Styles and Layout are powered by Tailwind CSS.",
+		topics: ["tailwindcss"],
+	},
+];
 ---
 
 <ul
@@ -17,47 +48,10 @@ const sortedByStargazersCount = Array.isArray(listUserRepos?.data)
 	class="grid grid-cols-1 sm:grid-cols-2 p-0 min-h-[8rem] min-w-[16rem] link-card-grid gap-x-3 gap-y-8"
 >
 	{
-		sortedByStargazersCount ? (
-			sortedByStargazersCount.map((repo) => {
-				return !repo.fork && !repo.private ? (
-					<Card
-						href={repo.html_url}
-						title={repo.name}
-						stargazers={repo.stargazers_count}
-						body={repo.description ?? ""}
-						tags={
-							repo.topics && repo.topics.length ? repo.topics : [repo.language?.toLowerCase() || ""]
-						}
-					/>
-				) : null;
-			})
-		) : (
-			<>
-				<Card
-					href="https://github.com/NivaldoFarias"
-					title="Github Profile"
-					body="Explore the projects I've previously worked on."
-					tags={["github"]}
-				/>
-				<Card
-					href="https://astro.build/"
-					title="Astro"
-					body="This project was built with Astro. Explore their documentation."
-					tags={["astro"]}
-				/>
-				<Card
-					href="https://daisyui.com/"
-					title="Themes"
-					body="Themes and color palettes powered by DaisyUI."
-					tags={["tailwindcss", "daisyui"]}
-				/>
-				<Card
-					href="https://tailwindcss.com/"
-					title="Tailwind CSS"
-					body="All Styles and Layout are powered by Tailwind CSS."
-					tags={["tailwindcss"]}
-				/>
-			</>
-		)
+		sortedByStargazersCount?.length
+			? sortedByStargazersCount.map((repo) =>
+					!repo.fork && !repo.private ? <Card data={repo} /> : null,
+				)
+			: defaultCards.map((data) => <Card data={data} />)
 	}
 </ul>

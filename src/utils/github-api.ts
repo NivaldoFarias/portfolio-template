@@ -1,12 +1,13 @@
 import type { Endpoints } from "@octokit/types";
+
 import { env } from "../env";
 
 export const api = {
-	listUserRepos: (queryParams?: Record<string, any>) => {
+	listUserRepos: (queryParams?: ListRepoQueryParams) => {
 		const params = new URLSearchParams(queryParams).toString();
 		const url = `${env.GITHUB_API_URL}users/${env.GITHUB_API_OWNER}/repos?${params}`;
 
-		return githubApi<Endpoints["GET /repos/{owner}/{repo}"]["response"]>(url);
+		return githubApi<Endpoints["GET /repos/{owner}/{repo}"]["response"]["data"][]>(url);
 	},
 	repoReadme: (repo: string) => {
 		const url = `${env.GITHUB_API_URL}repos/${env.GITHUB_API_OWNER}/${repo}/readme`;
@@ -35,3 +36,24 @@ export default async function githubApi<T>(
 
 	return response.json();
 }
+
+declare interface ListRepoQueryParams {
+	/** @default "owner" */
+	type?: "all" | "owner" | "member";
+
+	/** @default "full_name" */
+	sort?: "created" | "updated" | "pushed" | "full_name";
+
+	/** @default "30" */
+	per_page?: number;
+
+	/** @default "1" */
+	page?: number;
+
+	/** @default "asc" // when using `"full_name"`, otherwise `"desc"` */
+	direction?: "asc" | "desc";
+
+	[queryParam: string]: any;
+}
+
+export type RepositoryData = Endpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
