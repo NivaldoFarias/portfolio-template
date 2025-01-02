@@ -48,67 +48,42 @@ const { data } = Astro.props;
 			}
 		</div>
 
-		<!-- metadata -->
-		<div class="stats">
-			<div class="stat">
-				<div class="stat-figure text-primary">
+		<div class="stats bg-inherit">
+			<div class="stat pb-0">
+				<div class="stat-figure text-primary mr-4 hidden sm:inline-block">
 					<Icon
 						name="mdi:star"
-						height="28"
-						width="28"
+						height="34"
+						width="34"
 					/>
 				</div>
 				<div class="stat-title">Stargazers</div>
 				<div class="stat-value text-primary">{data.stargazers_count}</div>
-				<div class="stat-desc"></div>
 			</div>
 
-			<div class="stat">
-				<div class="stat-figure text-secondary">
+			<div class="stat pb-0">
+				<div class="stat-figure text-secondary mr-4 hidden sm:inline-block">
 					<Icon
-						name="mdi:lightning-bolt-outline"
-						height="28"
-						width="28"
+						name="mdi:database"
+						height="34"
+						width="34"
 					/>
 				</div>
-				<div class="stat-title">Page Views</div>
-				<div class="stat-value text-secondary">{data.network_count}</div>
-				<div class="stat-desc"></div>
+				<div class="stat-title">Size (in MB)</div>
+				<div class="stat-value text-secondary">{data.size || 0}</div>
 			</div>
 
-			<div class="stat">
-				<div class="stat-figure text-secondary">
+			<div class="stat pb-0">
+				<div class="stat-figure text-accent hidden sm:inline-block">
 					<Icon
 						name="mdi:source-fork"
-						height="28"
-						width="28"
+						height="34"
+						width="34"
 					/>
 				</div>
 				<div class="stat-title">Forks</div>
-				<div class="stat-value">{data.forks_count}</div>
-				<div class="stat-desc"></div>
+				<div class="stat-value text-accent">{data.forks_count || 0}</div>
 			</div>
 		</div>
-		<!-- <div
-			tabindex="0"
-			class="collapse border-base-300 bg-base-200 border"
-		>
-			<input type="checkbox" />
-			<div class="collapse-title text-xl font-medium">Statistics</div>
-			<div class="collapse-content">
-			</div>
-		</div> -->
-		<!-- {
-			typeof stargazers === "number" ? (
-				<div class="shadow-inner flex justify-between items-center p-2 rounded-lg mt-4">
-					<Icon
-						name="mdi:star"
-						height="26"
-						width="26"
-					/>
-					<div class="stat-value">{stargazers}</div>
-				</div>
-			) : null
-		} -->
 	</div>
 </li>

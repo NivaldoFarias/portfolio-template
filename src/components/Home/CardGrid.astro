@@ -10,11 +10,6 @@ const listUserRepos = await api.listUserRepos({
 	direction: "desc",
 });
 
-const repoPriority = "portfolio";
-const sortedByStargazersCount = listUserRepos?.sort((a, b) =>
-	b.name === repoPriority ? 1 : b.stargazers_count - a.stargazers_count,
-);
-
 const defaultCards: Partial<RepositoryData>[] = [
 	{
 		html_url: "https://github.com/NivaldoFarias",
@@ -48,10 +43,8 @@ const defaultCards: Partial<RepositoryData>[] = [
 	class="grid grid-cols-1 sm:grid-cols-2 p-0 min-h-[8rem] min-w-[16rem] link-card-grid gap-x-3 gap-y-8"
 >
 	{
-		sortedByStargazersCount?.length
-			? sortedByStargazersCount.map((repo) =>
-					!repo.fork && !repo.private ? <Card data={repo} /> : null,
-				)
+		listUserRepos?.length
+			? listUserRepos.map((repo) => (!repo.fork && !repo.private ? <Card data={repo} /> : null))
 			: defaultCards.map((data) => <Card data={data} />)
 	}
 </ul>
