@@ -1,96 +1,16 @@
 ---
-import type { VFile } from "vfile";
-import type { Github } from "../../types/github";
-
-import TableOfContents from "./TableOfContents.astro";
 import RepoMetadata from "./RepoMetadata.astro";
-
-import { escapeChars } from "../utils/escape";
-
-import { unified } from "unified";
-import remarkParse from "remark-parse";
-import sectionize from "remark-sectionize";
-import remarkGfm from "remark-gfm";
-import remarkRehype from "remark-rehype";
-import remarkHeadings from "@vcarl/remark-headings";
-import firstHeading from "remark-first-heading";
-import rehypeRaw from "rehype-raw";
-
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeStringify from "rehype-stringify";
-import rehypePrettyCode from "rehype-pretty-code";
-import rehypeExternalLinks from "rehype-external-links";
 
 if (!Astro.params.slug) return Astro.redirect("/404");
 
-import { env } from "../env";
+import { api } from "../utils/github-api";
 
-const headers = {
-	"Authorization": `Bearer ${env.GITHUB_API_TOKEN}`,
-	"Accept": "application/vnd.github+json",
-	"X-GitHub-Api-Version": env.GITHUB_API_VERSION,
-};
-const url = `${env.GITHUB_API_URL}repos/${env.GITHUB_API_OWNER}/${Astro.params.slug}/readme`;
-
-let res: Github.GetReadme | undefined;
-try {
-	res = await fetch(url, { headers })
-		.then((res) => res.json())
-		.catch((error) => console.error(error));
-} catch (error) {
-	console.error(error);
-}
-
-if (!res) return Astro.redirect("/404");
-
-let file: VFile | undefined;
-
-try {
-	file = await unified()
-		.use(remarkParse)
-		.use(firstHeading, { heading: Astro.params.slug })
-		.use(remarkHeadings)
-		.use(sectionize)
-		.use(remarkGfm)
-		.use(remarkRehype, { allowDangerousHtml: true })
-		.use(rehypeRaw)
-		.use(rehypeSlug)
-		.use(rehypeStringify)
-		.use(rehypeExternalLinks, {
-			rel: ["external"],
-			target: "_blank",
-		})
-		.use(rehypePrettyCode, {
-			theme: "rose-pine-moon",
-			keepBackground: true,
-		})
-		.use(rehypeAutolinkHeadings, {
-			behavior: "append",
-			properties: { ariaHidden: false, tabIndex: 0 },
-		})
-		.process(
-			res.content
-				? decodeURIComponent(escapeChars(atob(res.content)))
-				: "No `README.md` file was found for this repository.",
-		);
-} catch (error) {
-	console.error(error);
-}
-
-if (!file) return Astro.redirect("/404");
+const ghReadme = await api.repoReadme(Astro.params.slug);
 ---
 
 <div class="flex justify-center pr-0 md:pr-[5.3rem] relative">
-	<TableOfContents
-		title={Astro.params.slug}
-		headings={file.data.headings as Array<{ depth: number; value: string }>}
-	/>
 	<div class="relative min-w-0 max-w-[100vw] flex flex-col">
 		<RepoMetadata />
-		<div
-			class="px-4 pt-4 prose"
-			set:html={file}
-		/>
+		<div class="px-4 pt-4 prose">{ghReadme?.data.content ?? ""}</div>
 	</div>
 </div>

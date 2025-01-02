@@ -1,23 +1,10 @@
 ---
-import type { Github } from "./../../../types/github";
-
 import Card from "./Card.astro";
-import { env } from "../../env";
+import { api } from "../../utils/github-api";
 
-const headers = {
-	"Authorization": `Bearer ${env.GITHUB_API_TOKEN}`,
-	"Accept": "application/vnd.github+json",
-	"X-GitHub-Api-Version": env.GITHUB_API_VERSION,
-};
+const listUserRepos = await api.listUserRepos({ per_page: 100, sort: "created" });
 
-const url = `${env.GITHUB_API_URL}users/${env.GITHUB_API_OWNER}/repos?per_page=100&sort=created`;
-const listUserRepos = await fetch(url, { method: "GET", headers });
-
-if (!listUserRepos.ok) {
-	throw new Error(`[${listUserRepos.status}] ${listUserRepos.statusText}`);
-}
-
-const data: Github.ListUserRepos[] | undefined = await listUserRepos.json();
+const data = listUserRepos?.data;
 
 const repoPriority = "portfolio";
 const sortedByStargazersCount = data?.sort((a, b) =>
