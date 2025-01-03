@@ -1,30 +1,40 @@
 {
     "extends": "astro/tsconfigs/base",
     "compilerOptions": {
-        /* Language Compilation Options */
-        "resolveJsonModule": true,
+        /* Type Checking */
+        "strict": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "skipLibCheck": false,
+        "forceConsistentCasingInFileNames": true,
+
+        /* Interop Constraints */
+        "esModuleInterop": true,
+        "verbatimModuleSyntax": true,
+
+        /* JavaScript Support */
         "allowJs": true,
         "checkJs": true,
 
-        /* Emit Rules */
+        /* Emit */
         "noEmit": true,
 
-        /* Type Checking Rules */
-        "strict": true,
-        "noPropertyAccessFromIndexSignature": true,
+        /* Plugins */
+        "plugins": [
+            {
+                "name": "@astrojs/ts-plugin"
+            }
+        ],
 
-        /* Other Options */
-        "skipLibCheck": false,
-        "esModuleInterop": true,
-        "verbatimModuleSyntax": true,
-        "forceConsistentCasingInFileNames": true,
-
-        "plugins": [{ "name": "@astrojs/ts-plugin" }],
+        /* Modules */
+        "resolveJsonModule": true,
         "typeRoots": ["types"],
         "baseUrl": ".",
         "paths": {
             "~/*": ["./*"]
-        }
+        },
+
+        /* Language and Environment */
+        "jsx": "preserve"
     },
     "include": ["**/*.js", "**/*.ts", ".*.cjs", "*.mjs", ".astro/types.d.ts"],
     "exclude": ["node_modules", ".astro/", "dist"]

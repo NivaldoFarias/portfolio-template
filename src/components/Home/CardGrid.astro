@@ -2,7 +2,9 @@
 import type { RepositoryData } from "../../utils/github-api";
 
 import Card from "./Card.astro";
+
 import { api } from "../../utils/github-api";
+import { defaultCards, selectOptions } from "../../data/card-grid";
 
 const listUserRepos = await api.listUserRepos({
 	per_page: 100,
@@ -10,32 +12,28 @@ const listUserRepos = await api.listUserRepos({
 	direction: "desc",
 });
 
-const defaultCards: Partial<RepositoryData>[] = [
-	{
-		html_url: "https://github.com/NivaldoFarias",
-		name: "Github Profile",
-		description: "Explore the projects I've previously worked on.",
-		topics: ["github"],
-	},
-	{
-		html_url: "https://astro.build/",
-		name: "Astro",
-		description: "This project was built with Astro. Explore their documentation.",
-		topics: ["astro"],
-	},
-	{
-		html_url: "https://daisyui.com/",
-		name: "Themes",
-		description: "Themes and color palettes powered by DaisyUI.",
-		topics: ["tailwindcss", "daisyui"],
-	},
-	{
-		html_url: "https://tailwindcss.com/",
-		name: "Tailwind CSS",
-		description: "All Styles and Layout are powered by Tailwind CSS.",
-		topics: ["tailwindcss"],
-	},
-];
+const toRender = listUserRepos?.length
+	? listUserRepos.filter((repo) => !repo.fork && !repo.private)
+	: defaultCards;
+
+declare type SortCriteria = (typeof selectOptions)[number]["value"];
+
+function sortRepositories(criteria: SortCriteria) {
+	const getSortValue = (repo: RepositoryData, criteria: SortCriteria) => {
+		if (criteria.endsWith("_count") || criteria === "size") {
+			return Number(repo[criteria]) ?? 0;
+		} else if (criteria === "pushed_at") {
+			return new Date(repo.pushed_at || 0).getTime() ?? 0;
+		} else {
+			return new Date(repo.updated_at || 0).getTime() ?? 0;
+		}
+	};
+
+	toRender.sort(
+		(a, b) =>
+			getSortValue(b as RepositoryData, criteria) - getSortValue(a as RepositoryData, criteria),
+	);
+}
 ---
 
 <>
@@ -43,29 +41,31 @@ const defaultCards: Partial<RepositoryData>[] = [
 		<div class="label join-item">
 			<span class="label-text text-2xl">Sort repositories by</span>
 		</div>
-		<select class="select select-ghost select-lg join-item">
-			<option
-				disabled
-				selected
-			>
-				last pushed
-			</option>
-			<option>Star Wars</option>
-			<option>Harry Potter</option>
-			<option>Lord of the Rings</option>
-			<option>Planet of the Apes</option>
-			<option>Star Trek</option>
+		<select
+			class="select select-ghost select-lg join-item"
+			id="sort-repos"
+		>
+			{
+				selectOptions.map((option) => (
+					<option
+						value={option.value}
+						selected={option.value === "updated_at"}
+					>
+						{option.label}
+					</option>
+				))
+			}
 		</select>
 	</div>
 	<ul
 		role="list"
+		id="card-grid"
 		class="grid grid-cols-1 sm:grid-cols-2 p-0 min-h-[8rem] min-w-[16rem] link-card-grid gap-x-3 gap-y-8 mt-4"
 	>
-		{
-			listUserRepos?.length
-				? listUserRepos.map((repo) => (!repo.fork && !repo.private ? <Card data={repo} /> : null))
-				: defaultCards.map((data) => <Card data={data} />)
-		}
+		{toRender.map((data) => <Card data={data} />)}
 	</ul>
-	<script></script>
 </>
+
+<script type="module">
+	console.log(document.getElementById("card-grid").childNodes);
+</script>
