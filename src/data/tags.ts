@@ -1,4 +1,4 @@
-export const TAGS = {
+export const tags = {
 	"typescript": { label: "TypeScript", icon: "devicon:typescript", class: "badge-info" },
 	"javascript": { label: "JavaScript", icon: "devicon:javascript", class: "badge-warning" },
 	"react": { label: "React.js", icon: "devicon:react", class: "badge-primary" },
@@ -88,4 +88,4 @@ export const TAGS = {
 	},
 };
 
-export type Tags = typeof TAGS;
+export type Tags = typeof tags;

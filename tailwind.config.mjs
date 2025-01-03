@@ -1,10 +1,10 @@
 import tailwindTypography from "@tailwindcss/typography";
 import daisyui from "daisyui";
-import { env } from "./src/env";
+// import { env } from "./src/env";
 
 /** @type {import("daisyui").Config} */
 const daisyuiConfig = {
-	logs: env.NODE_ENV === "development",
+	// logs: env.NODE_ENV === "development",
 	themes: [
 		"light",
 		"dark",

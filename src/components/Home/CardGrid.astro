@@ -19,20 +19,18 @@ const toRender = listUserRepos?.length
 declare type SortCriteria = (typeof selectOptions)[number]["value"];
 
 function sortRepositories(criteria: SortCriteria) {
-	const getSortValue = (repo: RepositoryData, criteria: SortCriteria) => {
+	const getSortValue = (repo: Partial<RepositoryData>, criteria: SortCriteria) => {
 		if (criteria.endsWith("_count") || criteria === "size") {
-			return Number(repo[criteria]) ?? 0;
+			return Number(repo[criteria]) || 0;
 		} else if (criteria === "pushed_at") {
 			return new Date(repo.pushed_at || 0).getTime() ?? 0;
 		} else {
-			return new Date(repo.updated_at || 0).getTime() ?? 0;
+			return new Date(repo.updated_at || 0).getTime() || 0;
 		}
 	};
 
-	toRender.sort(
-		(a, b) =>
-			getSortValue(b as RepositoryData, criteria) - getSortValue(a as RepositoryData, criteria),
-	);
+	return (a: Partial<RepositoryData>, b: Partial<RepositoryData>) =>
+		getSortValue(b, criteria) - getSortValue(a, criteria);
 }
 ---
 
@@ -62,10 +60,6 @@ function sortRepositories(criteria: SortCriteria) {
 		id="card-grid"
 		class="grid grid-cols-1 sm:grid-cols-2 p-0 min-h-[8rem] min-w-[16rem] link-card-grid gap-x-3 gap-y-8 mt-4"
 	>
-		{toRender.map((data) => <Card data={data} />)}
+		{toRender.sort(sortRepositories("open_issues_count")).map((data) => <Card data={data} />)}
 	</ul>
 </>
-
-<script type="module">
-	console.log(document.getElementById("card-grid").childNodes);
-</script>

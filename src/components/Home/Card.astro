@@ -3,7 +3,7 @@ import type { RepositoryData } from "../../utils/github-api";
 
 import { Icon } from "astro-icon/components";
 
-import { TAGS } from "../../data/tags";
+import { tags } from "../../data/tags";
 import Badge from "./Badge.astro";
 
 export interface Props {
@@ -39,8 +39,8 @@ const { data } = Astro.props;
 		<div class="flex flex-wrap gap-2 mt-1">
 			{
 				data.topics?.map((tag) => {
-					return tag in TAGS ? (
-						<Badge tag={TAGS[tag as keyof typeof TAGS]} />
+					return tag in tags ? (
+						<Badge tag={tags[tag as keyof typeof tags]} />
 					) : (
 						<div class="flex gap-1 badge badge-outline">{tag}</div>
 					);
