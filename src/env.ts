@@ -10,5 +10,5 @@ export const env = createEnv({
 		GITHUB_API_VERSION: z.string().min(1),
 		STAGE: z.enum(["development", "production", "test"]),
 	},
-	runtimeEnv: import.meta.env,
+	runtimeEnv: process.env,
 });
