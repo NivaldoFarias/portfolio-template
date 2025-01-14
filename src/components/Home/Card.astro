@@ -49,38 +49,17 @@ const { data } = Astro.props;
 		</div>
 
 		<div class="stats bg-inherit">
-			<div class="stat pb-0">
-				<div class="stat-figure text-primary mr-4 hidden sm:inline-block">
-					<Icon
-						name="mdi:star"
-						height="34"
-						width="34"
-					/>
-				</div>
+			<div class="stat pb-0 !overflow-hidden">
 				<div class="stat-title">Stargazers</div>
 				<div class="stat-value text-primary">{data.stargazers_count}</div>
 			</div>
 
-			<div class="stat pb-0">
-				<div class="stat-figure text-secondary mr-4 hidden sm:inline-block">
-					<Icon
-						name="mdi:database"
-						height="34"
-						width="34"
-					/>
-				</div>
+			<div class="stat pb-0 !overflow-hidden">
 				<div class="stat-title">Size (in MB)</div>
 				<div class="stat-value text-secondary">{data.size || 0}</div>
 			</div>
 
-			<div class="stat pb-0">
-				<div class="stat-figure text-accent hidden sm:inline-block">
-					<Icon
-						name="mdi:source-fork"
-						height="34"
-						width="34"
-					/>
-				</div>
+			<div class="stat pb-0 !overflow-hidden">
 				<div class="stat-title">Forks</div>
 				<div class="stat-value text-accent">{data.forks_count || 0}</div>
 			</div>
